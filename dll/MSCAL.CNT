@@ -1,0 +1,75 @@
+:Base mscal.hlp>ref
+:Title 日历控件参考
+:Index 日历控件参考=mscal.hlp
+1 日历控件参考
+2 日历（Canlender）控件=ccsumCalendarDescription@mscal.hlp>Langref
+2 ActiveX 控件参考
+3 关于 ActiveX 控件的属性、方法及事件的信息=acccUsingCustomControlLanguageElements@acvba80.hlp>Langref
+3 应用于 ActiveX 控件的 Microsoft Access 语言元素=acccAccessLanguageElements@acvba80.hlp>Langref
+3 ActiveX 控件的自定义属性对话框=acccViewCustomControlProperties@acvba80.hlp>Langref
+3 查看 ActiveX 控件的“关于”框=acccViewCustomControlAboutBox@acvba80.hlp>Langref
+2 示例
+3 A-P
+4 DayFont 属性示例=ccproDayFontX>Langref
+4 Refresh 方法和 FirstDay 属性示例=ccmthRefreshX@mscal.hlp>Langref
+4 GridFont 属性示例=ccproDayFontX>Langref
+4 NextDay 方法示例=ccmthNextDayX@mscal.hlp>Langref
+4 NextMonth 方法示例=ccmthNextMonthX@mscal.hlp>Langref
+4 NextWeek 方法示例=ccmthNextWeekX@mscal.hlp>Langref
+4 NextYear 方法示例=ccmthNextYearX@mscal.hlp>Langref
+4 PreviousDay 方法示例=ccmthPreviousDayX@mscal.hlp>Langref
+4 PreviousMonth 方法示例=ccmthPreviousMonthX@mscal.hlp>Langref
+4 PreviousWeek 方法示例=ccmthPreviousWeekX@mscal.hlp>Langref
+4 PreviousYear 方法示例=ccmthPreviousYearX@mscal.hlp>Langref
+3 Q-Z
+4 Refresh 方法和 FirstDay 属性示例=ccmthRefreshX@mscal.hlp>Langref
+2 事件
+3 A-P
+4 AfterUpdate 事件=ccevtAfterUpdate>Langref
+4 BeforeUpdate 事件=ccevtBeforeUpdate>Langref
+4 Click 事件=ccevtClick>Langref
+4 DblClick 事件=ccevtDblClick>Langref
+4 KeyDown 事件=ccevtKeydown>Langref
+4 KeyPress 事件=ccevtKeypress>Langref
+4 KeyUp 事件=ccevtKeydown>Langref
+4 NewMonth 事件=ccevtNewMonth@mscal.hlp>Langref
+4 NewYear 事件=ccevtNewYear@mscal.hlp>Langref
+2 方法
+3 A-P
+4 AboutBox 方法=ccmthAboutBox@mscal.hlp>Langref
+4 NextDay 方法=ccmthNextDay@mscal.hlp>Langref
+4 NextMonth 方法=ccmthNextMonth@mscal.hlp>Langref
+4 NextWeek 方法=ccmthNextWeek @mscal.hlp>Langref
+4 NextYear 方法=ccmthNextYear @mscal.hlp>Langref
+4 PreviousDay 方法=ccmthPreviousDay @mscal.hlp>Langref
+4 PreviousMonth 方法=ccmthPreviousMonth@mscal.hlp>Langref
+4 PreviousWeek 方法=ccmthPreviousWeek@mscal.hlp>Langref
+4 PreviousYear 方法=ccmthPreviousYear@mscal.hlp>Langref
+3 Q-Z
+4 Refresh 方法=ccmthRefresh>Langref
+4 Today 方法=ccmthToday@mscal.hlp>Langref
+2 属性
+3 A-P
+4 BackColor 属性=ccproBackColor>Langref
+4 Day 属性=ccproDay@mscal.hlp>Langref
+4 DayFont 属性=ccproDayFont@mscal.hlp>Langref
+4 DayFontColor 属性=ccproDayFontColor@mscal.hlp>Langref
+4 DayLength 属性=ccproDayLength@mscal.hlp>Langref
+4 FirstDay 属性=ccproFirstDay@mscal.hlp>Langref
+4 GridCellEffect 属性=ccproGridLinesFormat@mscal.hlp>Langref
+4 GridFont 属性=ccproGridFont>Langref
+4 GridFontColor 属性=ccproGridFontColor>Langref
+4 GridLinesColor 属性=ccproGridLinesColor@mscal.hlp>Langref
+4 Month 属性=ccproMonth@mscal.hlp>Langref
+4 MonthLength 属性=ccproMonthLength@mscal.hlp>Langref
+3 Q-Z
+4 ShowDateSelectors 属性=ccproShowDateSelectors@mscal.hlp>Langref
+4 ShowDays 属性=ccproShowDays@mscal.hlp>Langref
+4 ShowHorizontalGrid 属性=ccproShowHorizontalGridlines@mscal.hlp>Langref
+4 ShowTitle 属性=ccproShowTitle@mscal.hlp>Langref
+4 ShowVerticalGrid 属性=ccproShowVerticalGridlines@mscal.hlp>Langref
+4 TitleFont 属性=ccproTitleFont@mscal.hlp>Langref
+4 TitleFontColor 属性=ccproTitleFontColor@mscal.hlp>Langref
+4 Value 属性=ccproValue>Langref
+4 ValueIsNull 属性=ccproValueIsNull>Langref
+4 Year 属性=ccproYear@mscal.hlp>Langref
