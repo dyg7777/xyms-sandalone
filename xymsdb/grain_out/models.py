@@ -9,3 +9,8 @@ class OwnerForGoods(models.Model):
     ownerforgoods_uncode=models.CharField(max_length=100,blank=False,null=True,default='',help_text='货权人代码')
     ownerforgoods_phonenumber=models.CharField(max_length=100,blank=False,null=True,default='',help_text='货权人联系方式')
     co_owners=models.CharField(max_length=255,blank=False,null=True,help_text='货物共有人')
+
+# 发货品种
+class AcquisitionVarieties(models.Model):
+    AV_name=models.CharField(max_length=255, blank=False, null=True,default='玉米',help_text='发货品种')
+    acquisitioncaps = models.DecimalField(max_digits=12 ,decimal_places=4,help_text='发货上限')
