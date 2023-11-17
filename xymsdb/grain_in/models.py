@@ -1,9 +1,13 @@
+from email.policy import default
+from enum import unique
 from re import T
 from django.db import models
+from django.conf import settings
+import sys
+sys.path.append('../')
 import uuid
-from django.utils.timezone import timezone
-from pymysql import NULL
-from .. login.models import Enterprise
+from django.utils import timezone
+from login.models import Enterprise
 # Create your models here.
 
 
@@ -151,12 +155,13 @@ class GrainSellerInformations(models.Model):
 
 # 车辆省份信息
 class VehicleProvince(models.Model):
-    province_id=models.CharField(max_length=20,unique=True,blank=True,null=True,default='',help_text='省份代码')
-    province_name=models.CharField(max_length=120,unique=True,blank=False,null=False,default='',help_text='省份名称')
-    province_code=models.CharField(max_length=10,unique=True,blank=False,null=False,default='',help_text='省份简称')
-    city_id=models.CharField(max_length=20,unique=True,blank=True,null=True,default='',help_text='城市代码')
-    city_name=models.CharField(max_length=120,unique=True,blank=False,null=False,default='',help_text='城市名称')
-    city_code=models.CharField(max_length=10,unique=True,blank=False,null=False,default='',help_text='城市简称')
+    code_id=models.CharField(max_length=10,unique=True,blank=True,null=True,default='',help_text="分类编号")
+    province_id=models.CharField(max_length=20,blank=True,null=True,default='',help_text='省份代码')
+    province_name=models.CharField(max_length=120,blank=False,null=False,default='',help_text='省份名称')
+    province_code=models.CharField(max_length=10,blank=False,null=False,default='',help_text='省份简称')
+    city_id=models.CharField(max_length=20,blank=True,null=True,default='',help_text='城市代码')
+    city_name=models.CharField(max_length=120,blank=False,null=False,default='',help_text='城市名称')
+    city_code=models.CharField(max_length=10,blank=False,null=False,default='',help_text='城市简称')
 
 
 
@@ -173,7 +178,7 @@ class CarDriverAndVehicleInformations(models.Model):
 class grain_in_main(models.Model):
     
     # 收购信息
-    main_guid=models.CharField(max_length=60, blank=False, null=False,unique=True,default=uuid.uuid4().hex,help_text='记录的UID')
+    main_guid=models.CharField(max_length=60, blank=False, null=False,unique=True,default='',help_text='记录的UID')
     create_time = models.DateTimeField(auto_now_add=True,help_text='记录创建时间')
     grain_type = models.CharField(max_length=50,blank=True,null=True,help_text='粮食类型')
     acquisition_type= models.CharField(max_length=50,blank=True,null=True,help_text='收购类型')

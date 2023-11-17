@@ -1,4 +1,5 @@
 from django.db import models
+from django.conf import settings
 from django.contrib.auth.hashers import make_password,check_password
 from django.utils import timezone
 # Create your models here.
@@ -11,7 +12,7 @@ class Enterprise(models.Model):
     enter_author_end_date=models.DateTimeField(default=timezone.now,null=False,blank=False,help_text='授权开始时间')
     enter_code=models.CharField(max_length=255, default="",null=False,blank=False, help_text='企业码')
     enter_author_code = models.CharField(max_length=255,null=False,blank=False, default="", help_text='授权码')
-    enter_free_credit = models.IntegerField(max_length=5, null=False, blank=False,default=50,help_text='授权额度')
+    enter_free_credit = models.IntegerField(null=False, blank=False,default=50,help_text='授权额度')
     version_number=models.CharField(max_length=255, null=False, blank=False, default='',help_text='版本号')
 
 
@@ -28,8 +29,8 @@ class UserPermissions(models.Model):
 
 # 用户库
 class User(models.Model):
-    username=models.CharField(max_length=255,null=False,blank=False,unique=True,default=make_password('鑫奕科创','980513','pdkdf2_sha1'),help_text='用户名')
-    password = models.CharField(max_length=255, null=False,blank=False,default=make_password('15145181511','1975217','pbkdf2_sha1'), help_text='登录密码')
+    username=models.CharField(max_length=255,null=False,blank=False,unique=True,default=make_password('鑫奕科创',salt='980513',hasher='default'),help_text='用户名')
+    password = models.CharField(max_length=255, null=False,blank=False,default=make_password('15145181511',salt='1975217',hasher="default"), help_text='登录密码')
     show_name=models.CharField(max_length=255, null=False, blank=False,default='鑫奕科创',help_text='用来显示用户名信息')
     user_permissions = models.ForeignKey(UserPermissions,on_delete=models.CASCADE,related_name='userpremissions',help_text='用户权限')
 
