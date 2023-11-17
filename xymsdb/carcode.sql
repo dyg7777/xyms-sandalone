@@ -1,5 +1,3 @@
--- 车辆牌照号省份
-
 INSERT INTO `VehicleProvince` VALUES (1, '110000', '北京市', '京', '', '北京市', 'A');
 INSERT INTO `VehicleProvince` VALUES (7, '120000', '天津市', '津', '', '天津市', 'A');
 INSERT INTO `VehicleProvince` VALUES (11, '130000', '河北省', '冀', '130100', '石家庄市', 'A');
@@ -373,5 +371,3 @@ INSERT INTO `VehicleProvince` VALUES (388, '46000', '海南省', '琼', '', '陵
 INSERT INTO `VehicleProvince` VALUES (389, '46000', '海南省', '琼', '', '保亭县', 'D');
 INSERT INTO `VehicleProvince` VALUES (390, '46000', '海南省', '琼', '', '琼中县', 'D');
 INSERT INTO `VehicleProvince` VALUES (391, '46000', '海南省', '琼', '', '儋州市', 'F');
-
-SET FOREIGN_KEY_CHECKS = 1;
