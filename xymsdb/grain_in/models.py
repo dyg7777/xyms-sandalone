@@ -21,10 +21,10 @@ class OwnerForGoods(models.Model):
 
 # 收购品种
 class AcquisitionVarieties(models.Model):
-    AV_name=models.CharField(max_length=50, blank=False, null=False,unique=True,default='玉米',help_text='收购品种')
+    AV_name=models.CharField(max_length=50, blank=False, null=False,unique=True,default='',help_text='收购品种')
     find_code = models.CharField(max_length=20, blank=True, null=True,unique=True,default='',help_text='查询编码')
     py_abbreviation=models.CharField(max_length=20,blank=True,null=True,unique=False,default='',help_text='拼音简写')
-    acquisitioncaps = models.DecimalField(max_digits=12 ,decimal_places=4,help_text='收购上限')
+    acquisitioncaps = models.DecimalField(max_digits=16 ,decimal_places=4,help_text='收购上限')
 
 
 # 玉米收购国标

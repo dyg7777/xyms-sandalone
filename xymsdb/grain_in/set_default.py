@@ -1,6 +1,9 @@
-# 车辆所属省份
-from .models import VehicleProvince
 
+from .models import VehicleProvince
+from .models import AcquisitionVarieties
+from django.db import connection
+from pypinyin import pinyin
+#  车辆所属省份
 def vehicle_default():
     VLPLATE=[
         [1, '110000', '北京市', '京', '', '北京市', 'A'],
@@ -377,7 +380,6 @@ def vehicle_default():
         [390, '46000', '海南省', '琼', '', '琼中县', 'D' ],
         [391, '46000', '海南省', '琼', '', '儋州市', 'F' ],
         ]
-    from django.db import connection
     str_sql='truncate table `grain_in_vehicleprovince`; '
     cursor=connection.cursor()
     cursor.execute(str_sql)
@@ -386,7 +388,24 @@ def vehicle_default():
     for ll in VLPLATE:
             defaultins=VehicleProvince.objects.create(code_id=str(ll[0]),province_id=ll[1],province_name=ll[2],province_code=ll[3],city_id=ll[4],city_name=ll[5],city_code=ll[6])
             defaultins.save()
-            print(defaultins)
+
 
 
 # ################################
+# 收购品种默认值
+
+
+def acquisition_defaule():
+    DEFAULT=[
+        ['1','玉米',100000000000],
+        ['2','水稻',100000000000],
+        ['3','黄豆',100000000000],
+    ]
+    str_sql='truncate table `grain_in_acquisitionvarieties`; '
+    cursor=connection.cursor()
+    cursor.execute(str_sql)
+    cursor.close()
+    connection.close()
+    for ll in DEFAULT:
+            defaultins=AcquisitionVarieties.objects.create(AV_name=ll[1],find_code=ll[0],py_abbreviation=pinyin(ll[1],style=pypinyin.FIRST_LETTER),acquisitioncaps=ll[2])
+            defaultins.save()
