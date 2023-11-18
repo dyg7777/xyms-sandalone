@@ -1,9 +1,13 @@
+from email.policy import default
+from enum import unique
 from re import T
 from django.db import models
+from django.conf import settings
+import sys
+sys.path.append('../')
 import uuid
-
-from pymysql import NULL
-from .. login.models import Enterprise
+from django.utils import timezone
+from login.models import Enterprise
 # Create your models here.
 
 
@@ -59,7 +63,7 @@ class QualityInspectionDeductionStandardFile(models.Model):
     file_contents=models.TextField(default='',help_text='文件内容')
     create_datetime=models.DateTimeField(auto_now_add=True,help_text='创建时间')
     edit_datetime = models.DateTimeField(auto_now=True,help_text='最后修改时间')
-    status=models.CharField(max_length=2,blank=True,null=True,default='1',help_text='记录状态，0失效')
+    status=models.CharField(max_length=2,blank=True,null=True,default='1',help_text='记录状态0失效')
     # 扣量标准
 class QualityInspectionDeductionStandard(models.Model): 
     file_id=models.ForeignKey(QualityInspectionDeductionStandardFile,on_delete=models.CASCADE,help_text='对应质检文件ID号')
@@ -73,7 +77,7 @@ class QualityInspectionDeductionStandard(models.Model):
     increment_scale=models.DecimalField(max_digits=10,decimal_places=2,help_text='增量比例')
     create_datetime=models.DateTimeField(auto_now_add=True,help_text='创建时间')
     edit_datetime = models.DateTimeField(auto_now=True,help_text='最后修改时间')
-    status=models.CharField(max_length=2,blank=True,null=True,default='1',help_text='记录状态，0失效')
+    status=models.CharField(max_length=2,blank=True,null=True,default='1',help_text='记录状态0失效')
         #质检标准操作备份
 class QualityInspectionDeductionStandardBack(models.Model):
     operation_type=models.CharField(max_length=50,blank=True,null=True,default='',help_text='操作类型，例如删除、修改')
@@ -151,12 +155,13 @@ class GrainSellerInformations(models.Model):
 
 # 车辆省份信息
 class VehicleProvince(models.Model):
-    province_id=models.CharField(max_length=20,unique=True,blank=True,null=True,default='',help_text='省份代码')
-    province_name=models.CharField(max_length=120,unique=True,blank=False,null=False,default='',help_text='省份名称')
-    province_code=models.CharField(max_length=10,unique=True,blank=False,null=False,default='',help_text='省份简称')
-    city_id=models.CharField(max_length=20,unique=True,blank=True,null=True,default='',help_text='城市代码')
-    city_name=models.CharField(max_length=120,unique=True,blank=False,null=False,default='',help_text='城市名称')
-    city_code=models.CharField(max_length=10,unique=True,blank=False,null=False,default='',help_text='城市简称')
+    code_id=models.CharField(max_length=10,unique=True,blank=True,null=True,default='',help_text="分类编号")
+    province_id=models.CharField(max_length=20,blank=True,null=True,default='',help_text='省份代码')
+    province_name=models.CharField(max_length=120,blank=False,null=False,default='',help_text='省份名称')
+    province_code=models.CharField(max_length=10,blank=False,null=False,default='',help_text='省份简称')
+    city_id=models.CharField(max_length=20,blank=True,null=True,default='',help_text='城市代码')
+    city_name=models.CharField(max_length=120,blank=False,null=False,default='',help_text='城市名称')
+    city_code=models.CharField(max_length=10,blank=False,null=False,default='',help_text='城市简称')
 
 
 
@@ -171,8 +176,14 @@ class CarDriverAndVehicleInformations(models.Model):
     
 # 主数据库
 class grain_in_main(models.Model):
-    main_guid=models.CharField(max_length=60, blank=False, null=False,unique=True,default=uuid.uuid4().hex,help_text='记录的UID')
+    
+    # 收购信息
+    main_guid=models.CharField(max_length=60, blank=False, null=False,unique=True,default='',help_text='记录的UID')
     create_time = models.DateTimeField(auto_now_add=True,help_text='记录创建时间')
+    grain_type = models.CharField(max_length=50,blank=True,null=True,help_text='粮食类型')
+    acquisition_type= models.CharField(max_length=50,blank=True,null=True,help_text='收购类型')
+    test_sheets_number= models.CharField(max_length=50,blank=True,null=True,help_text='化验单号')
+    upload_code=models.CharField(max_length=50, blank=True, null=True,help_text='传输编号')
     # 售粮人信息
     grainseller_name=models.CharField(max_length=60,blank=False,null=False,default='',help_text='售粮人姓名')
     grainseller_uncode=models.CharField(max_length=20, blank=True, null=True,default='',help_text='身份证号')
@@ -196,12 +207,14 @@ class grain_in_main(models.Model):
     driver_photo = models.TextField(blank=True,null=True,default='',help_text='司机照片')
     vehicle_type=models.CharField(max_length=30, blank=True, null=True,unique=True,default='',help_text='车辆类型')
     vehicle_province=models.CharField(max_length=20, blank=True,null=True,default='',help_text='车辆牌照号')
-    vehicle_front_photo=models.TextField(blank=True,null=True,default='',help_text='车辆正面照片')
-    vehicle_rear_photo=models.TextField(blank=True,null=True,default='',help_text='车尾照片')
     grainseller_driver=models.CharField(max_length=6, blank=True,null=True,default='是',help_text='售粮人和司机是否同一人')
     packag_name = models.CharField(max_length=30, blank=True,null=True,default='散积',unique=True,help_text='包装物名称')
     location_number = models.CharField(max_length=30, blank=True, null=True,unique=True,default='',help_text='仓号')
     warehouse_number=models.CharField(max_length=30, blank=True, null=True,unique=True,default='',help_text='货位号')
+    total_vehicle_front_photo=models.TextField(blank=True,null=True,default='',help_text='毛重过磅车辆正面照片')
+    total_vehicle_rear_photo=models.TextField(blank=True,null=True,default='',help_text='毛重过磅车尾照片')
+    empty_vehicle_front_photo=models.TextField(blank=True,null=True,default='',help_text='皮重过磅车辆正面照片')
+    empty_vehicle_rear_photo=models.TextField(blank=True,null=True,default='',help_text='皮重过磅车尾照片')
     # 货权人
     ownerforgoods_name=models.CharField(max_length=120,blank=False,null=False,unique=True,default='企业私有',help_text='货权人名称')
     ownerforgoods_uncode=models.CharField(max_length=100,blank=False,null=False,default='',help_text='货权人代码')
@@ -252,13 +265,12 @@ class grain_in_main(models.Model):
     truevalue_odour=models.CharField(max_length=10, default="正常",blank=True,null=True, help_text='气味')
     truevalue_moisture_content=models.DecimalField(max_digits=6,blank=True,null=True,decimal_places=1,help_text='水份')
     truevalue_severely_moldy=models.DecimalField(max_digits=6,decimal_places=1,blank=True,null=True,help_text='霉变粒')
-    # 单价
-    unit_price=models.DecimalField(max_digits=12,decimal_places=5,help_text='商品单价')
     # 重量信息
     total_weight=models.DecimalField(max_digits=12,decimal_places=0,help_text='毛重')
     empty_weight=models.DecimalField(max_digits=12,decimal_places=0,help_text='皮重')
     total_subtract_empty_weight=models.DecimalField(max_digits=12,decimal_places=0,help_text='毛减皮重量')
     Weight_deduction_on_site=models.DecimalField(max_digits=12,decimal_places=0,help_text='现场掺杂扣减重量')
+    net_weight=models.DecimalField(max_digits=12,decimal_places=0,help_text='净重量')
     defective_deducted=models.DecimalField(max_digits=12,decimal_places=0,help_text='不完善粒扣减重量')
     insect_damaged_deducted=models.DecimalField(max_digits=12,decimal_places=0,help_text='虫蚀粒扣减重量')
     spotted_deducted=models.DecimalField(max_digits=12,decimal_places=0,help_text='病斑粒扣减重量')
@@ -274,3 +286,36 @@ class grain_in_main(models.Model):
     organic_impurities_deducted=models.DecimalField(max_digits=12,decimal_places=0,help_text='有机杂质扣减重量')
     moisture_content_deducted=models.DecimalField(max_digits=12,decimal_places=0,help_text='水份扣减重量')
     severely_moldy_deducted=models.DecimalField(max_digits=12,decimal_places=0,help_text='霉变粒扣减重量')
+    deducted_weight=models.DecimalField(max_digits=8,decimal_places=4,help_text='定扣重比例')
+    uantitative_weight_deducted=models.DecimalField(max_digits=12,decimal_places=0,help_text='定比例扣减重量')
+    pure_weight=models.DecimalField(max_digits=12,decimal_places=0,help_text='纯重')
+    # 单价
+    unit_price=models.DecimalField(max_digits=12,decimal_places=5,help_text='商品单价')
+    accounts_payable=models.DecimalField(max_digits=15,decimal_places=2,help_text='应付金额')
+    deduction_unloadingfee_amount=models.DecimalField(max_digits=15,decimal_places=2,help_text='扣卸车费')
+    actual_payment=models.DecimalField(max_digits=15,decimal_places=2,help_text='实付金额')
+    # 各种时间
+    check_in_datetime=models.DateTimeField(default=timezone.now,help_text='登记时间')
+    total_weight_datetime=models.DateTimeField(help_text='毛重过磅时间')
+    empty_weight_datetime=models.DateTimeField(help_text='皮重过磅时间')
+    print_ticket_datetime=models.DateTimeField(help_text=' 结算打票时间')
+    payment_datetime=models.DateTimeField(help_text='付款时间')
+    upload_datetime=models.DateTimeField(help_text='上传时间')
+    # 各种状态
+    check_in_status=models.CharField(max_length=1,blank=True,null=True,help_text='完成登记')
+    total_weight_status=models.CharField(max_length=1,blank=True,null=True,help_text='完成毛重过磅')
+    empty_weight_status=models.CharField(max_length=1,blank=True,null=True,help_text=' 完成皮重过磅')
+    print_ticket_status=models.CharField(max_length=1,blank=True,null=True,help_text=' 完成打票')
+    payment_status=models.CharField(max_length=1,blank=True,null=True,help_text=' 完成付款')
+    upload_status=models.CharField(max_length=1,blank=True,null=True,help_text=' 完成上传')
+    # 人员
+    chemist_name=models.CharField(max_length=50,blank=True,null=True,help_text='化验员')
+    test_data_entry_name=models.CharField(max_length=50,blank=True,null=True,help_text='化验录入员')
+    total_weight_persions_name=models.CharField(max_length=50,blank=True,null=True,help_text='毛重检斤员')
+    empty_weight_persions_name=models.CharField(max_length=50,blank=True,null=True,help_text='皮重检斤员')
+    weight_persions_name=models.CharField(max_length=50,blank=True,null=True,help_text='统一检斤员')
+    print_ticket_persion_name=models.CharField(max_length=50,blank=True,null=True,help_text='付款打票员')
+    cash_management_persion_name=models.CharField(max_length=50,blank=True,null=True,help_text='现金')
+    accounting_persion_name=models.CharField(max_length=50,blank=True,null=True,help_text='会计')
+    payment_persion_name=models.CharField(max_length=50,blank=True,null=True,help_text='付款员')
+    
