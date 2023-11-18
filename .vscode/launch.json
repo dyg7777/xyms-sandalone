@@ -1,6 +1,14 @@
 {
     "configurations": [
         {
+            "name": "Python: 当前文件",
+            "type": "python",
+            "request": "launch",
+            "program": "${file}",
+            "console": "integratedTerminal",
+            "justMyCode": true
+        },
+        {
             "name": "Python: Django",
             "type": "python",
             "request": "launch",
@@ -9,7 +17,9 @@
                 "runserver"
             ],
             "django": true,
-            "justMyCode": true
-        },
-    ]
-}
+            "justMyCode": true,
+            "env": {
+                "path": "C:\\Users\\Administrator\\.virtualenvs\\Administrator-S9WHhKuh\\Scripts\\activate"
+            },
+        ]
+    }
