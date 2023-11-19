@@ -1,9 +1,10 @@
-
 import pypinyin
 from .models import VehicleProvince
-from .models import AcquisitionVarieties
+from .models import AcquisitionVarieties,GBCornInformations
 from django.db import connection
+from django.conf import settings
 import pypinyin
+import base64,sys,os
 #  车辆所属省份
 def vehicle_default():
     VLPLATE=[
@@ -415,3 +416,35 @@ def acquisition_defaule():
             c="".join(b)                  
             defaultins=AcquisitionVarieties.objects.create(AV_name=ll[1],find_code=ll[0],py_abbreviation=c,acquisitioncaps=ll[2])
             defaultins.save()
+
+
+# 国标初始化
+
+def GBforCorn():
+      DEFAULT=[
+          ['一等',1000,720,4.0,1,1,1,1,2.0,1,1,1,1.0,1,1,1,'正常','正常',14.0,1],
+          ['二等',720,690,6.0,1,1,1,1,2.0,1,1,1,1.0,1,1,1,'正常','正常',14.0,1],
+          ['三等',690,660,8.0,1,1,1,1,2.0,1,1,1,1.0,1,1,1,'正常','正常',14.0,1],
+          ['四等',660,630,10.0,1,1,1,1,2.0,1,1,1,1.0,1,1,1,'正常','正常',14.0,1],
+          ['五等',630,600,15.0,1,1,1,1,2.0,1,1,1,1.0,1,1,1,'正常','正常',14.0,1],
+          ['等外',600,0,4.0,1,1,1,1,2.0,1,1,1,1.0,1,1,1,'正常','正常',14.0,1],
+     ]
+      sql_str='truncate table `grain_in_gbcorninformations`; '
+      conn=connection.cursor()
+      conn.execute(sql_str)      
+      conn.close()
+      connection.close()
+      acquisition_name='玉米'
+      file_name='GB 1353-2018玉米'
+      fpath=os.path.join(settings.BASE_DIR,'GB1353-2018.pdf')
+      with open(fpath,'rb') as ff:
+            base64_str=base64.b64encode(ff.read())
+            file_contents=base64_str.decode('utf-8')
+
+      for ll in DEFAULT:
+           conn=GBCornInformations.objects.create(acquisitionVarietiesid=acquisition_name,GB_filename=file_name,GB_file_contents=file_contents,purchase_price=0,purchase_name=ll[0],test_weight_high=ll[1],test_weight_low=ll[2])
+           conn.save()
+
+
+
+    
