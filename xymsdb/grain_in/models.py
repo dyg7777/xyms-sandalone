@@ -1,9 +1,7 @@
-from email.policy import default
-from enum import unique
 from re import T
 from django.db import models
-from django.conf import settings
 import sys
+
 sys.path.append('../')
 import uuid
 from django.utils import timezone
@@ -29,7 +27,7 @@ class AcquisitionVarieties(models.Model):
 
 # 玉米收购国标
 class GBCornInformations(models.Model):
-    acquisitionVarietiesid=models.ForeignKey(AcquisitionVarieties,related_name='acquisition_varities',on_delete=models.CASCADE,help_text='收购品种库ID')
+    acquisitionVarietiesid=models.CharField(max_length=50,null=True,blank=True,default='',help_text='收购品种')
     GB_filename = models.CharField(max_length=50, blank=False, null=False,help_text='国标文件号')
     GB_file_contents=models.TextField(blank=True,null=True,default='',help_text='文件内容')
     purchase_price=models.DecimalField(max_digits=12,decimal_places=6,help_text='等级价格')
@@ -66,7 +64,7 @@ class QualityInspectionDeductionStandardFile(models.Model):
     status=models.CharField(max_length=2,blank=True,null=True,default='1',help_text='记录状态0失效')
     # 扣量标准
 class QualityInspectionDeductionStandard(models.Model): 
-    file_id=models.ForeignKey(QualityInspectionDeductionStandardFile,on_delete=models.CASCADE,help_text='对应质检文件ID号')
+    file_id=models.CharField(max_length=100,null=True,blank=True,default='',help_text='对应质检文件ID号')
     field_name=models.CharField(max_length=100,blank=True,null=True,default='',help_text='对应字段名')
     chinese_annotation=models.CharField(max_length=100,blank=True,null=True,default='',help_text='中文标注')
     range_upper_limit=models.DecimalField(max_digits=10,decimal_places=2,help_text='范围上限')
@@ -99,8 +97,8 @@ class QualityInspectionDeductionStandardBack(models.Model):
 
 # 水份定价表
 class MoisturePrice(models.Model):
-    varieties_id=models.ForeignKey(AcquisitionVarieties,blank=True,null=True,on_delete=models.CASCADE,help_text='品种ID')
-    purchase_id=models.ForeignKey(GBCornInformations,blank=True,null=True,on_delete=models.DO_NOTHING,help_text='等级标准')
+    varieties_id=models.CharField(max_length=50,null=True,blank=True,default='',help_text='品种名称')
+    purchase_id=models.CharField(max_length=50,null=True,blank=True,default='',help_text='等级标准')
     moisture=models.DecimalField(max_digits=7, blank=True,null=True,decimal_places=4, help_text="水份值")
     price=models.DecimalField(max_digits=7, decimal_places=4,blank=True,null=True, help_text="水份对应价格")
 
@@ -131,7 +129,7 @@ class LocationWarehouseNumber(models.Model):
 
 # 卸车费设置
 class UnloadingFee(models.Model):
-    varieties_id=models.ForeignKey(AcquisitionVarieties,on_delete=models.CASCADE,help_text='品种ID')
+    varieties_id=models.CharField(max_length=50,null=True,blank=True,default='',help_text='品种名称')
     unloadingfee_price=models.DecimalField(max_digits=12,decimal_places=4,help_text='卸车费按公斤计算')
 
 # 售粮人信息

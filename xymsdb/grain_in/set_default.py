@@ -1,8 +1,9 @@
 
+import pypinyin
 from .models import VehicleProvince
 from .models import AcquisitionVarieties
 from django.db import connection
-from pypinyin import pinyin
+import pypinyin
 #  车辆所属省份
 def vehicle_default():
     VLPLATE=[
@@ -407,5 +408,10 @@ def acquisition_defaule():
     cursor.close()
     connection.close()
     for ll in DEFAULT:
-            defaultins=AcquisitionVarieties.objects.create(AV_name=ll[1],find_code=ll[0],py_abbreviation=pinyin(ll[1],style=pypinyin.FIRST_LETTER),acquisitioncaps=ll[2])
+            a=pypinyin.pinyin(ll[1],style=pypinyin.STYLE_FIRST_LETTER)
+            b=[]
+            for l1 in range(len(a)):
+               b.append(str(a[l1][0]).title())
+            c="".join(b)                  
+            defaultins=AcquisitionVarieties.objects.create(AV_name=ll[1],find_code=ll[0],py_abbreviation=c,acquisitioncaps=ll[2])
             defaultins.save()
