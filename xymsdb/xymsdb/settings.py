@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/4.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
-import os 
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -78,14 +78,14 @@ WSGI_APPLICATION = 'xymsdb.wsgi.application'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
 DATABASES = {
-        'default': {
+    'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'xyms_db',    #你的数据库名称
-        'USER': 'root',   #你的数据库用户名
-        'PASSWORD': 'Qq1975217', #你的数据库密码
-        'HOST': '127.0.0.1', #你的数据库主机，留空默认为localhost
-        'PORT': '3306', #你的数据库端口
-        }
+        'NAME': 'xyms_db',  # 你的数据库名称
+        'USER': 'root',  # 你的数据库用户名
+        'PASSWORD': 'Qq1975217',  # 你的数据库密码
+        'HOST': '127.0.0.1',  # 你的数据库主机，留空默认为localhost
+        'PORT': '3306',  # 你的数据库端口
+    }
     # 'default': {
     #     'ENGINE': 'django.db.backends.sqlite3',
     #     'NAME': BASE_DIR / 'db.sqlite3',
@@ -112,7 +112,7 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 PASSWORD_HASHERS = (
- 
+
     'django.contrib.auth.hashers.PBKDF2PasswordHasher',
     'django.contrib.auth.hashers.PBKDF2SHA1PasswordHasher',
     'django.contrib.auth.hashers.BCryptSHA256PasswordHasher',
@@ -126,7 +126,7 @@ PASSWORD_HASHERS = (
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
 
-#打印日志到屏幕
+# 打印日志到屏幕
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
@@ -145,16 +145,15 @@ LOGGING = {
     }
 }
 
-#配置模版路径
+# 配置模版路径
 TEMPLATE_DIRS = (
-        os.path.join(BASE_DIR,'templates').replace('\\','/'),
-    )
+    os.path.join(BASE_DIR, 'templates').replace('\\', '/'),
+)
 
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 # MEDIA_URL是指从浏览器访问时的地址前缀。
 MEDIA_URL = '/media/'
-
 
 
 LANGUAGE_CODE = 'zh-hans'
@@ -163,16 +162,17 @@ TIME_ZONE = 'Asia/Shanghai'
 
 USE_I18N = True
 
-USE_TZ = True
+USE_L10N = True
 
+USE_TZ = False
 
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
-STATIC_ROOT='/var/www/XYMS/static'
+STATIC_ROOT = '/var/www/XYMS/static'
 STATIC_URL = '/static/'
-#STATICFILES_DIRS=(
+# STATICFILES_DIRS=(
 #        os.path.join(BASE_DIR,'static/').replace('\\','/'),
 #        )
 # Default primary key field type
