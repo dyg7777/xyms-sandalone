@@ -34,12 +34,13 @@ class RunDate(models.Model):
 
 # 用户权限
 class UserPermissions(models.Model):
+    permissions_code=models.CharField(max_length=10,null=True,blank=True,default='',help_text='权限ID')
     permissions_name = models.CharField(
-        max_length=255, null=True, blank=True, unique=True, help_text='权限名称')
+        max_length=255, null=True, blank=True, unique=True,default='', help_text='权限名称')
 
 
 # 用户库
-class User(models.Model):
+class User_local(models.Model):
     username = models.CharField(max_length=255, null=True, blank=True, unique=True, default=make_password(
         '鑫奕科创', salt='980513', hasher='default'), help_text='用户名')
     password = models.CharField(max_length=255, null=True, blank=True, default=make_password(
@@ -47,14 +48,21 @@ class User(models.Model):
     show_name = models.CharField(
         max_length=255, null=True, blank=True, default='鑫奕科创', help_text='用来显示用户名信息')
     user_permissions = models.CharField(
-        max_length=50, null=True, blank=True, default='游客', help_text='用户权限')
+        max_length=50, null=True, blank=True, default='0000', help_text='用户权限')
 
 
 # 程序目录
 class ProgectPath(models.Model):
-    path_name = models.CharField(
+    projectfile_path = models.CharField(
         max_length=255, null=True, blank=True, unique=True, default='', help_text='程序工作目录')
-
+    profiles_path= models.CharField(
+        max_length=255, null=True, blank=True, unique=True, default='', help_text='配置文件目录')
+    tempfiles_path= models.CharField(
+        max_length=255, null=True, blank=True, unique=True, default='', help_text='临时文件目录')
+    reportfile_path= models.CharField(
+        max_length=255, null=True, blank=True, unique=True, default='', help_text='报表文件目录')
+    resourcefile_path= models.CharField(
+        max_length=255, null=True, blank=True, unique=True, default='', help_text='资源文件目录')
 
 # 数据库目录
 class DatabasePath(models.Model):
@@ -67,6 +75,6 @@ class DatabasePath(models.Model):
     user_name = models.CharField(
         max_length=255, null=True, blank=True, default='root', help_text='用户名')
     password = models.CharField(
-        max_length=255, null=True, blank=True, default='', help_text='密码')
+        max_length=255, null=True, blank=True, default='53169549', help_text='密码')
     charset = models.CharField(
         max_length=255, null=True, blank=True, default='utf-8', help_text='字符编码')
