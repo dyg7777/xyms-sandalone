@@ -11,6 +11,7 @@ pyside6 = "*"
 paramiko = "*"
 mysqlclient = "*"
 pypinyin = "*"
+requests = "*"
 
 [dev-packages]
 

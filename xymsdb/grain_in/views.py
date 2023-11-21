@@ -9,7 +9,7 @@ from .models import CarDriverAndVehicleInformations, GrainSellerInformations
 def default_set(requests):
     # retu = vehicle_default()
     # vehicletypedefault()
-    retu = packagindefault()
+    # retu = packagindefault()
     # retu = acquisition_defaule()
     # retu = GBforCorn()
-    return HttpResponse(retu)
+    return HttpResponse('ok')
