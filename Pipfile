@@ -12,6 +12,7 @@ paramiko = "*"
 mysqlclient = "*"
 pypinyin = "*"
 requests = "*"
+requestes = "*"
 
 [dev-packages]
 

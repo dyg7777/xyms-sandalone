@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "99ecefe3c843c60513bd333eb88910d802f8260756d052bbf27e152fb1afa98e"
+            "sha256": "4d02dbb376ef0624f510c74f4d63ae068222411b266884b971bae0c2a649686c"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -352,7 +352,6 @@
                 "sha256:e1d37c51ad26186de355cbcec16613ebdabfa9689bbade9c538835205a8abbe9"
             ],
             "index": "pip_conf_index_global",
-            "markers": "python_version >= '3.8'",
             "version": "==4.2.7"
         },
         "idna": {
@@ -381,7 +380,6 @@
                 "sha256:e3b07706a44a2037e3739a3b8dddaa423d8a341dab077fa387e9c58bf6edce00"
             ],
             "index": "pip_conf_index_global",
-            "markers": "python_version >= '3.8'",
             "version": "==2.2.0"
         },
         "numpy": {
@@ -455,7 +453,6 @@
                 "sha256:fcd76d67ca2d48f56e2db45833cf9d58f548f97f61eecd3fdc74268417632b8a"
             ],
             "index": "pip_conf_index_global",
-            "markers": "python_version >= '3.9'",
             "version": "==2.1.3"
         },
         "paramiko": {
@@ -464,7 +461,6 @@
                 "sha256:b7bc5340a43de4287bbe22fe6de728aa2c22468b2a849615498dd944c2f275eb"
             ],
             "index": "pip_conf_index_global",
-            "markers": "python_version >= '3.6'",
             "version": "==3.3.1"
         },
         "pycparser": {
@@ -484,7 +480,6 @@
                 "sha256:aade29b861e81a3c68a9e90d43f3db257940c0208983a0128b82f1a4cef639aa"
             ],
             "index": "pip_conf_index_global",
-            "markers": "python_version >= '3.7'",
             "version": "==1.1.0"
         },
         "pynacl": {
@@ -509,7 +504,6 @@
                 "sha256:a5d61a79c5f48f6b4a422f010c20d48fcd53c705784df4aa80e329493219a4be"
             ],
             "index": "pip_conf_index_global",
-            "markers": "python_version >= '2.6' and python_version not in '3.0, 3.1, 3.2, 3.3' and python_version < '4'",
             "version": "==0.49.0"
         },
         "pyside6": {
@@ -520,7 +514,6 @@
                 "sha256:f40917b7a0c5c7f0c7faaa87e66ffa3b58d9d1d3d977d30fc07e193b82dd6749"
             ],
             "index": "pip_conf_index_global",
-            "markers": "python_version < '3.13' and python_version >= '3.8'",
             "version": "==6.6.0"
         },
         "pyside6-addons": {
@@ -558,13 +551,19 @@
             ],
             "version": "==2023.3.post1"
         },
+        "requestes": {
+            "hashes": [
+                "sha256:13491483ec8a5a8ed296b7e9f88a4297a283421beefe740e69d6c359b15dad8f"
+            ],
+            "index": "pip_conf_index_global",
+            "version": "==0.0.1"
+        },
         "requests": {
             "hashes": [
                 "sha256:58cd2187c01e70e6e26505bca751777aa9f2ee0b7f4300988b709f44e013003f",
                 "sha256:942c5a758f98d790eaed1a29cb6eefc7ffb0d1cf7af05c3d2791656dbd6ad1e1"
             ],
             "index": "pip_conf_index_global",
-            "markers": "python_version >= '3.7'",
             "version": "==2.31.0"
         },
         "shiboken6": {
