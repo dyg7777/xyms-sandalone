@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'grain_out.apps.GrainOutConfig',
     'login.apps.LoginConfig',
     'upload.apps.UploadConfig',
+    'projtest.apps.ProjtestConfig',
 ]
 
 MIDDLEWARE = [

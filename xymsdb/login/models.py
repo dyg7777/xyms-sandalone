@@ -24,6 +24,8 @@ class Enterprise(models.Model):
         null=True, blank=True, default=50, help_text='授权额度')
     version_number = models.CharField(
         max_length=255, null=True, blank=True, default='', help_text='版本号')
+    app_name = models.CharField(
+        max_length=255, default='', null=True, blank=True, help_text='授权使用软件名称')
 
 
 # 作用于软件内部的时间
@@ -34,9 +36,10 @@ class RunDate(models.Model):
 
 # 用户权限
 class UserPermissions(models.Model):
-    permissions_code=models.CharField(max_length=10,null=True,blank=True,default='',help_text='权限ID')
+    permissions_code = models.CharField(
+        max_length=10, null=True, blank=True, default='', help_text='权限ID')
     permissions_name = models.CharField(
-        max_length=255, null=True, blank=True, unique=True,default='', help_text='权限名称')
+        max_length=255, null=True, blank=True, unique=True, default='', help_text='权限名称')
 
 
 # 用户库
@@ -55,16 +58,18 @@ class User_local(models.Model):
 class ProgectPath(models.Model):
     projectfile_path = models.CharField(
         max_length=255, null=True, blank=True, unique=True, default='', help_text='程序工作目录')
-    profiles_path= models.CharField(
+    profiles_path = models.CharField(
         max_length=255, null=True, blank=True, unique=True, default='', help_text='配置文件目录')
-    tempfiles_path= models.CharField(
+    tempfiles_path = models.CharField(
         max_length=255, null=True, blank=True, unique=True, default='', help_text='临时文件目录')
-    reportfile_path= models.CharField(
+    reportfile_path = models.CharField(
         max_length=255, null=True, blank=True, unique=True, default='', help_text='报表文件目录')
-    resourcefile_path= models.CharField(
+    resourcefile_path = models.CharField(
         max_length=255, null=True, blank=True, unique=True, default='', help_text='资源文件目录')
 
 # 数据库目录
+
+
 class DatabasePath(models.Model):
     host = models.CharField(max_length=255, null=True,
                             blank=True, default='127.0.0.1', help_text='数据库连接地址')

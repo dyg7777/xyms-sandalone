@@ -2,7 +2,7 @@
 *可以用这些基本函数封装成更容易理解的vfp对像
 
 
-Set Library To  foxjson.dll
+Set Library To  D:\xyms-sandalone\PRG\foxjson.dll
  
 *create a json object,like a boy
 json=json_Create()
