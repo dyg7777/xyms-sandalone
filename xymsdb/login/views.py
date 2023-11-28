@@ -12,6 +12,7 @@ import requests
 
 
 class ResetDefault():
+
     def set_login_default(request):
         data = json.loads(request.body)
         pprint(data['name'])
@@ -25,3 +26,8 @@ class ResetDefault():
         # userpermissions_default()
         # user_default()
         return HttpResponse(json_data)
+    
+    # 获得企业信息
+    def get_enterprise_information(request):
+        data=json.loads(request.body)
+        

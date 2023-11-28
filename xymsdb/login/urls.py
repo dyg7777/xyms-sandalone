@@ -18,5 +18,6 @@ from django.urls import path
 from .views import ResetDefault
 
 urlpatterns = [
-    path(r'set_default/', ResetDefault.set_login_default),
+    path(r'set_default/',ResetDefault.set_login_default),
+    path(r'get_enterprise_information/',ResetDefault.get_enterprise_information),
 ]
