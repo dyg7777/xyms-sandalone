@@ -1,6 +1,7 @@
 from datetime import date
 from http.client import responses
 import pprint
+from datetime import datetime
 import json
 from urllib import response
 from django.shortcuts import render
@@ -15,19 +16,10 @@ from .models import Enterprise, login_logs
 
 class ResetDefault():
 
-    def set_login_default(request):
-        data = json.loads(request.body)
-        pprint(data['name'])
-        pprint(type(data['name']))
+    def set_enterprise_information(request):
+        data=json.loads(request.body)
+        return HttpResponse('ok')
 
-        data1 = [{"aaa": 232342, '我是测试': '对，你是23423测试'}, {"aaa": 23, '我是测试': '对，你是测试'},
-                 {"aaa1": 213, '我是测试1': '对2，你是测试'}]
-        json_data = json.dumps(data1)
-
-        # rundate_default()
-        # userpermissions_default()
-        # user_default()
-        return HttpResponse(json_data)
 
     # 获得企业信息
     def get_enterprise_information(request):
@@ -42,8 +34,14 @@ class ResetDefault():
         for ll in retsql.values():
             res = {
                 'enter_name': ll.get('enter_name'),
-
+                'enter_uncode':ll.get('enter_uncode'),
+                'enter_author_start_date': datetime.strftime(ll.get('enter_author_start_date'),"%Y-%m-%d %H:%M:%S"),
+                'enter_author_end_date': datetime.strftime(ll.get('enter_author_end_date'),"%Y-%m-%d %H:%M:%S"),
+                'enter_free_credit':ll.get('enter_free_credit'),
+                'version_number':ll.get('version_number'),
+                'app_name':ll.get(' app_name'),
             }
             data.append(res)
         ret_data = json.dumps(data)
+        print (data)
         return HttpResponse(content=ret_data, content_type='applicaton/json')

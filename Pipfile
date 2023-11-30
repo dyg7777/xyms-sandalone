@@ -13,6 +13,7 @@ mysqlclient = "*"
 pypinyin = "*"
 requests = "*"
 requestes = "*"
+jmpy3 = "*"
 
 [dev-packages]
 
