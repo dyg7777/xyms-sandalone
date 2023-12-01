@@ -1,0 +1,1 @@
+SET MESSAGE TO '应用软件授权单位：'+ENTer_name+SPACE(2)+'收购单位税务登记号：'+enter_uncode+SPACE(5)+'软件版本号：'+version_num+SPACE(5)+'软件授权使用时间：'+DTOC(enter_start)+'至'+DTOC(enter_end)+SPACE(5)+'鑫奕科技引领粮食收储管理软件先锋。服务电话：15145181511(微信同号) QQ:50037071'
