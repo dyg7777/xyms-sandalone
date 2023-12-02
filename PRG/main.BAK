@@ -77,7 +77,7 @@ IF VRET=='ok' THEN
 		_SCREEN.IMG.PICTURE=QQQ
 		_SCREEN.ICON=TB
 		DO FORM 'LOGIN'
-		DO PROJECTPATH+'workbar'
+		DO 'workbar'
 		READ EVEN
 	ELSE
 		=MESSAGEBOX('软件未完成企业注册，请向软件供应商索取企业注册资料或者退出停止使用本软件！',0,'系统提示')

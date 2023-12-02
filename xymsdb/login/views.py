@@ -30,10 +30,11 @@ class ResetDefault():
             login_uuid=localuuid, return_uuid=retuuid)
         retsql.save()
         retsql = Enterprise.objects.all()
-        data1 = []
         data = []
         for ll in retsql.values():
             res = {
+                'status':'ok',
+                'retuuid':retuuid,
                 'enter_name': ll.get('enter_name'),
                 'enter_uncode': ll.get('enter_uncode'),
                 'enter_author_start_date': datetime.strftime(ll.get('enter_author_start_date'), "%Y-%m-%d,%H:%M:%S"),
@@ -45,3 +46,8 @@ class ResetDefault():
             data.append(res)
         ret_data = json.dumps(data)
         return HttpResponse(content=ret_data, content_type='applicaton/json')
+
+class VerifyInformation():
+    def verify_user(request):
+        data=json.loads(request.body)
+        verify_dev=login_logs.objects.filter(login_uuid=data['uuid'],)

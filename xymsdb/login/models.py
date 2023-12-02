@@ -47,12 +47,12 @@ class UserPermissions(models.Model):
 
 # 用户库
 class User_local(models.Model):
-    username = models.CharField(max_length=255, null=True, blank=True, unique=True, default=make_password(
+    username = models.CharField(max_length=50, null=True, blank=True, unique=True, default=make_password(
         '鑫奕科创', salt='980513', hasher='default'), help_text='用户名')
-    password = models.CharField(max_length=255, null=True, blank=True, default=make_password(
+    password = models.CharField(max_length=50, null=True, blank=True, default=make_password(
         '15145181511', salt='1975217', hasher="default"), help_text='登录密码')
     show_name = models.CharField(
-        max_length=255, null=True, blank=True, default='鑫奕科创', help_text='用来显示用户名信息')
+        max_length=100, null=True, blank=True, default='鑫奕科创', help_text='用来显示用户名信息')
     user_permissions = models.CharField(
         max_length=50, null=True, blank=True, default='0000', help_text='用户权限')
     enter_name=models.CharField(max_length=255,null=True,blank=True,default='',help_text='账户所属企业名称')
