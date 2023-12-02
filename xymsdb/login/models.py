@@ -56,6 +56,7 @@ class User_local(models.Model):
     user_permissions = models.CharField(
         max_length=50, null=True, blank=True, default='0000', help_text='用户权限')
     enter_name=models.CharField(max_length=255,null=True,blank=True,default='',help_text='账户所属企业名称')
+    create_datetime=models.DateTimeField(auto_now_add=True,help_text='创建时间')
 
 # 设备登录日志
 class login_logs(models.Model):
