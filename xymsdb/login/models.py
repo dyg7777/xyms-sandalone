@@ -47,25 +47,28 @@ class UserPermissions(models.Model):
 
 # 用户库
 class User_local(models.Model):
-    username = models.CharField(max_length=50, null=True, blank=True, unique=True, default=make_password(
+    username = models.CharField(max_length=255, null=True, blank=True, unique=True, default=make_password(
         '鑫奕科创', salt='980513', hasher='default'), help_text='用户名')
-    password = models.CharField(max_length=50, null=True, blank=True, default=make_password(
+    password = models.CharField(max_length=255, null=True, blank=True, default=make_password(
         '15145181511', salt='1975217', hasher="default"), help_text='登录密码')
     show_name = models.CharField(
         max_length=100, null=True, blank=True, default='鑫奕科创', help_text='用来显示用户名信息')
     user_permissions = models.CharField(
         max_length=50, null=True, blank=True, default='0000', help_text='用户权限')
-    enter_name=models.CharField(max_length=255,null=True,blank=True,default='',help_text='账户所属企业名称')
-    create_datetime=models.DateTimeField(auto_now_add=True,help_text='创建时间')
+    enter_name = models.CharField(
+        max_length=255, null=True, blank=True, default='', help_text='账户所属企业名称')
+    create_datetime = models.DateTimeField(auto_now_add=True, help_text='创建时间')
 
 # 设备登录日志
+
+
 class login_logs(models.Model):
-    login_uuid=models.CharField(max_length=100,null=True,blank=True,default='', help_text='登录设备UUID每次更新')
-    login_time=models.DateTimeField(auto_now_add=True,help_text='登录时间')
-    logout_time=models.DateTimeField(auto_now_add=True,help_text='登出时间')
-    return_uuid=models.CharField(max_length=60,null=True,blank=True,default='',help_text='返回前端登录识别码')
-
-
+    login_uuid = models.CharField(
+        max_length=100, null=True, blank=True, default='', help_text='登录设备UUID每次更新')
+    login_time = models.DateTimeField(auto_now_add=True, help_text='登录时间')
+    logout_time = models.DateTimeField(auto_now_add=True, help_text='登出时间')
+    return_uuid = models.CharField(
+        max_length=60, null=True, blank=True, default='', help_text='返回前端登录识别码')
 
 
 # 程序目录

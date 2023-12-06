@@ -15,11 +15,14 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.urls import path
-from .views import ResetDefault, VerifyInformation
+from .views import ResetDefault
+from .verify_user import VerifyUserInformation
 
 urlpatterns = [
     path(r'get_enterprise_information/',
          ResetDefault.get_enterprise_information),  # 获取企业信息
-    path(r'get_user_information/', VerifyInformation.get_user),  # 创建用户
-    path(r'verify_user_information/', VerifyInformation.verify_user),  # 用户登录验证
+    path(r'set_user_information/',
+         VerifyUserInformation.set_user_information),  # 创建用户
+    path(r'verify_user_information/',
+         VerifyUserInformation.verify_user_information),  # 用户登录验证
 ]

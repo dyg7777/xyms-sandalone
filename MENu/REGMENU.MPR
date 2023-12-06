@@ -1,6 +1,6 @@
 *       *********************************************************
 *       *                                                         
-*       * 12/05/23             REGMENU.MPR              16:21:01  
+*       * 12/06/23             REGMENU.MPR              17:30:06  
 *       *                                                         
 *       *********************************************************
 *       *                                                         
@@ -27,15 +27,15 @@
 SET SYSMENU TO
 SET SYSMENU AUTOMATIC
 
-DEFINE PAD _6rw0z1lij OF _MSYSMENU PROMPT "°ïÖú(\<H)" COLOR SCHEME 3 ;
+DEFINE PAD _6rx11ig8z OF _MSYSMENU PROMPT "°ïÖú(\<H)" COLOR SCHEME 3 ;
 	KEY ALT+H, ""
-DEFINE PAD _6rw0z1lik OF _MSYSMENU PROMPT "Èí¼þÊÚÈ¨(\<I)" COLOR SCHEME 3 ;
+DEFINE PAD _6rx11ig90 OF _MSYSMENU PROMPT "Èí¼þÊÚÈ¨(\<I)" COLOR SCHEME 3 ;
 	KEY ALT+I, ""
-DEFINE PAD _6rw0z1lil OF _MSYSMENU PROMPT "ÍË³ö(\<Q)" COLOR SCHEME 3 ;
+DEFINE PAD _6rx11ig91 OF _MSYSMENU PROMPT "ÍË³ö(\<Q)" COLOR SCHEME 3 ;
 	KEY ALT+Q, ""
-ON PAD _6rw0z1lij OF _MSYSMENU ACTIVATE POPUP °ïÖúh
-ON SELECTION PAD _6rw0z1lik OF _MSYSMENU do form pathh+"\scx\gzdw"
-ON SELECTION PAD _6rw0z1lil OF _MSYSMENU quit
+ON PAD _6rx11ig8z OF _MSYSMENU ACTIVATE POPUP °ïÖúh
+ON SELECTION PAD _6rx11ig90 OF _MSYSMENU do form pathh+"\scx\gzdw"
+ON SELECTION PAD _6rx11ig91 OF _MSYSMENU quit
 
 DEFINE POPUP °ïÖúh MARGIN RELATIVE SHADOW COLOR SCHEME 4
 DEFINE BAR 1 OF °ïÖúh PROMPT "¹Ù·½ÍøÕ¾(\<W)"
@@ -45,7 +45,7 @@ DEFINE BAR 4 OF °ïÖúh PROMPT "\-"
 DEFINE BAR 5 OF °ïÖúh PROMPT "Èí¼þÊÚÈ¨(\<A)"
 DEFINE BAR 6 OF °ïÖúh PROMPT "\-"
 ON SELECTION BAR 1 OF °ïÖúh ;
-	DO _6rw0z1lim ;
+	DO _6rx11ig92 ;
 	IN LOCFILE("\XYMS-SANDALONE\MENU\REGMENU" ,"MPX;MPR|FXP;PRG" ,"WHERE is REGMENU?")
 ON SELECTION BAR 3 OF °ïÖúh do form pathh+"\scx\sqxk"
 ON SELECTION BAR 5 OF °ïÖúh do form pathh+"\scx\gzdw"
@@ -53,7 +53,7 @@ ON SELECTION BAR 5 OF °ïÖúh do form pathh+"\scx\gzdw"
 
 *       *********************************************************
 *       *                                                         
-*       * _6RW0Z1LIM  ON SELECTION BAR 1 OF POPUP °ïÖúh           
+*       * _6RX11IG92  ON SELECTION BAR 1 OF POPUP °ïÖúh           
 *       *                                                         
 *       * Procedure Origin:                                       
 *       *                                                         
@@ -64,7 +64,7 @@ ON SELECTION BAR 5 OF °ïÖúh do form pathh+"\scx\gzdw"
 *       *                                                         
 *       *********************************************************
 *
-PROCEDURE _6rw0z1lim
+PROCEDURE _6rx11ig92
 LOCAL loWebBrowser
 loWebBrowser = CREATEOBJECT("InternetExplorer.Application")
 loWebBrowser.Navigate("http://www.xy2cn.com")
