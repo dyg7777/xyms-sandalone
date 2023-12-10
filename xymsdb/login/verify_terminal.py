@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from .models import Enterprise, login_logs
 from django.db.models import Q
 

@@ -1,9 +1,7 @@
-import uuid
+# -*- coding: utf-8 -*-
+
 from django.db import models
-from django.conf import settings
 from django.contrib.auth.hashers import make_password
-from django.forms import UUIDField
-from django.utils import timezone
 
 # Create your models here.
 

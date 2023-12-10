@@ -1,19 +1,34 @@
+# -*- coding: utf-8 -*-
+
 import json
 from django.contrib.auth.hashers import make_password
 from django.http import HttpResponse
 from django.db.models import Q
-from .models import User_local
+from .models import User_local, Enterprise
 from .verify_terminal import VerifyTerminal
 
 
 class VerifyUserInformation():
     def set_user_information(request):
         data = json.loads(request.body)
-
-        res = User_local.objects.create(username=make_password(
-            data['username'], salt='980513', hasher='default'), password=make_password(
-            data['passwd'], salt='980513', hasher='default'), show_name=data['showname'], user_permissions='2006', enter_name='鑫奕科创')
-        return HttpResponse(res)
+        retdata = []
+        try:
+            res = User_local.objects.create(username=make_password(
+                data['username'], salt='980513', hasher='default'), password=make_password(
+                data['passwd'], salt='980513', hasher='default'), show_name=data['showname'], user_permissions='2006', enter_name='鑫奕科创')
+            retdata.append({
+                'status': 'ok',
+                'info': '用户添加成功。'
+            })
+            jsondata = json.dumps(retdata)
+            return HttpResponse(content=jsondata)
+        except:
+            retdata.append({
+                'status': 'no',
+                'info': '用户添加失败，请检查信息完整性或用户名已经被占中。'
+            })
+            jsondata = json.dumps(retdata)
+            return HttpResponse(content=jsondata)
 
     def verify_user_information(request):
         data = json.loads(request.body)
@@ -70,13 +85,13 @@ class VerifyUserInformation():
                     else:
                         verify_user = User_local.objects.filter(Q(username=u_name) & Q(
                             password=u_pwd) & Q(enter_name=data['entercode']))
-                        # for value in verify_user.values():
-                        res = {
-                            'status': 'OK',
-                            'info': '登录成功。',
-                            # 'name_cn': value.get('show_name'),
-                            # 'name_id': value.get('id'),
-                        }
-                        retdata.append(res)
+                        for value in verify_user.values():
+                            res = {
+                                'status': 'OK',
+                                'info': '登录成功。',
+                                'name_cn': value.get('show_name'),
+                                'name_id': value.get('id'),
+                            }
+                            retdata.append(res)
                         jsondata = json.dumps(retdata)
                         return HttpResponse(content=jsondata)
