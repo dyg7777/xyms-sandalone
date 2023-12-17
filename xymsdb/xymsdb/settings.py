@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'login.apps.LoginConfig',
     'upload.apps.UploadConfig',
     'projtest.apps.ProjtestConfig',
+    'project_default_value.apps.ProjectDefaultValueConfig',
 ]
 
 MIDDLEWARE = [

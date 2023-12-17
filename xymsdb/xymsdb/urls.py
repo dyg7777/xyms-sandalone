@@ -26,4 +26,6 @@ urlpatterns = [
     path(r'grain_out/', include('grain_out.urls')),
     path(r'login/', include('login.urls')),
     path(r'test/', include('projtest.urls')),
+    path(r'project_default/', include('project_default_value.urls')), 
+
 ]

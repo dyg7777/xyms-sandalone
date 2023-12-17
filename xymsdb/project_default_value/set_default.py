@@ -1,11 +1,14 @@
 import pypinyin
-from .models import VehicleProvince
-from .models import AcquisitionVarieties, GBCornInformations, Packaging, VehicleType
+import sys
+sys.path.append('..')
+
+from grain_in.models import AcquisitionVarieties, GBCornInformations, Packaging, VehicleType,VehicleProvince
+from login.models import UserPermissions,User_local
 from django.db import connection
 from django.conf import settings
 import pypinyin
 import base64
-import sys
+
 import os
 #  车辆所属省份
 
@@ -463,7 +466,7 @@ def packagindefault():
     DEFAULT = [
         ['散积', '1'],
         ['麻袋', '2'],
-        ['麻袋', '3'],
+        ['丝袋', '3'],
         ['混装', '4'],
     ]
     str_sql = 'truncate table `grain_in_packaging`; '
@@ -504,3 +507,52 @@ def vehicletypedefault():
         defaultins = VehicleType.objects.create(
             vehicle_type=ll[0], find_code=ll[1], py_abbreviation=c)
         defaultins.save()
+
+
+# 用户默认权限
+
+def userpermissions_default():
+    DEFAULT=(
+        (1000, '粮质化验检验岗'),
+        (1001, '化验检验数据录入岗'),
+        (1002, '化验检验数据统计岗'),
+        (2001, '入库空车称重过磅岗'),
+        (2002, '入库重车称重过磅岗'),
+        (2003, '单磅入库称重过磅岗'),
+        (2004, '出库重车称重过磅岗'),
+        (2005, '出库空车称重过磅岗'),
+        (2006, '单磅出库称重过磅岗'),
+        (2007, '过磅数据统计岗'),
+        (3000, '付款出票操作岗'),
+        (3001, '付款票据核对岗'),
+        (3002, '付款现金支付岗'),
+        (3003, '付款现金复核岗'),
+        (3004, '付款数据统计岗'),
+        (3005, '会计岗'),
+        (4000, '出库数据统计岗'),
+        (5000, '仓储岗'),
+        (6000, '高层核心人员访问岗'),
+        (7000, '数据管理人员岗'),
+        (8000, '参数设置管理岗'),
+        (9000, '最高权限管理岗'),
+        (0000,'初始状态'),
+    )
+    sql_str = 'truncate table `login_userpermissions`;'
+    conn = connection.cursor()
+    conn.execute(sql_str)
+    conn.close()
+    connection.close()
+    for ll in DEFAULT:
+        retu=UserPermissions.objects.create(permissions_code=str(ll[0]),permissions_name=ll[1])
+        retu.save()
+
+# 用户库初始化
+
+def user_default():
+    sql_str = 'truncate table `login_user_local`;'
+    conn = connection.cursor()
+    conn.execute(sql_str)
+    conn.close()
+    connection.close()
+    retu=User_local.objects.create(user_permissions='0000')
+    retu.save()
