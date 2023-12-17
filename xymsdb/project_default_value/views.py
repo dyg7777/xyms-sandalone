@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from .set_default import vehicle_default, acquisition_defaule, GBforCorn, vehicletypedefault, packagindefault,userpermissions_default
+from .set_default import vehicle_default, acquisition_defaule, GBforCorn, vehicletypedefault, packagindefault,userpermissions_default,user_default
 # Create your views here.
 
 def default_set(requests):
@@ -16,4 +16,6 @@ def default_set(requests):
     GBforCorn()
 # 用户权限
     userpermissions_default()
+# 用户库初始化
+    user_default()
     return HttpResponse('ok')

@@ -48,7 +48,6 @@ class VerifyUserInformation():
             jsondata = json.dumps(retdata)
             return HttpResponse(content=jsondata)
         elif verres == '1':
-            print(9999)
             verify_user = User_local.objects.filter(Q(username=u_name)).count()
             if verify_user == 0:
                 res = {
@@ -59,7 +58,6 @@ class VerifyUserInformation():
                 jsondata = json.dumps(retdata)
                 return HttpResponse(content=jsondata)
             else:
-                print(11111)
                 verify_user = User_local.objects.filter(
                     Q(username=u_name) & Q(enter_name=data['entercode'])).count()
                 if verify_user == 0:
