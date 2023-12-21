@@ -32,12 +32,14 @@ class VerifyUserInformation():
 
     def verify_user_information(request):
         data = json.loads(request.body)
+        print(data['entername'])
+        print(data['passwd'])
         retdata = []
         u_name = make_password(
             data['username'], salt='980513', hasher='default')
-        u_pwd = make_password(data['passwd'], salt='980513', hasher='default')
+        u_pwd = make_password(data['passwd'], salt='1975217', hasher='default')
         verres = VerifyTerminal.verify_terminal(
-            VerifyTerminal(), data['uuid'], data['retuuid'], data['entercode'])
+            VerifyTerminal(), data['uuid'], data['retuuid'], data['entername'])
 
         if verres == '0':
             res = {
@@ -59,7 +61,7 @@ class VerifyUserInformation():
                 return HttpResponse(content=jsondata)
             else:
                 verify_user = User_local.objects.filter(
-                    Q(username=u_name) & Q(enter_name=data['entercode'])).count()
+                    Q(username=u_name) & Q(enter_name=data['entername'])).count()
                 if verify_user == 0:
                     res = {
                         'status': 'no',
@@ -71,7 +73,7 @@ class VerifyUserInformation():
                 else:
                     print(0000)
                     verify_user = User_local.objects.filter(Q(username=u_name) & Q(
-                        password=u_pwd) & Q(enter_name=data['entercode'])).count()
+                        password=u_pwd) & Q(enter_name=data['entername'])).count()
                     if verify_user == 0:
                         res = {
                             'status': 'no',
@@ -82,14 +84,16 @@ class VerifyUserInformation():
                         return HttpResponse(content=jsondata)
                     else:
                         verify_user = User_local.objects.filter(Q(username=u_name) & Q(
-                            password=u_pwd) & Q(enter_name=data['entercode']))
+                            password=u_pwd) & Q(enter_name=data['entername']))
                         for value in verify_user.values():
                             res = {
                                 'status': 'OK',
                                 'info': '登录成功。',
                                 'name_cn': value.get('show_name'),
                                 'name_id': value.get('id'),
+                                'user_permiss': value.get('user_permissions')
                             }
                             retdata.append(res)
+                            print(retdata)
                         jsondata = json.dumps(retdata)
                         return HttpResponse(content=jsondata)

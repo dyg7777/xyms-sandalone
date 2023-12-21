@@ -4,9 +4,9 @@ from django.db.models import Q
 
 
 class VerifyTerminal():
-    def verify_terminal(self, uuid_code, retu_code, enter_code):
+    def verify_terminal(self, uuid_code, retu_code, enter_name):
         verify_enter = Enterprise.objects.filter(
-            Q(enter_code=enter_code)).count()
+            Q(enter_name=enter_name)).count()
         if verify_enter == 0:
             return '0'
         else:
