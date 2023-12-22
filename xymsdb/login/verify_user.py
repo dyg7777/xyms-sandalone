@@ -94,6 +94,5 @@ class VerifyUserInformation():
                                 'user_permiss': value.get('user_permissions')
                             }
                             retdata.append(res)
-                            print(retdata)
                         jsondata = json.dumps(retdata)
                         return HttpResponse(content=jsondata)
