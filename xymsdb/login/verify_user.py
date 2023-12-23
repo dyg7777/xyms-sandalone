@@ -40,59 +40,70 @@ class VerifyUserInformation():
         u_pwd = make_password(data['passwd'], salt='1975217', hasher='default')
         verres = VerifyTerminal.verify_terminal(
             VerifyTerminal(), data['uuid'], data['retuuid'], data['entername'])
-
-        if verres == '0':
-            res = {
-                'status': 'no',
-                'info': '信息验证失败。',
-            }
-            retdata.append(res)
-            jsondata = json.dumps(retdata)
-            return HttpResponse(content=jsondata)
-        elif verres == '1':
-            verify_user = User_local.objects.filter(Q(username=u_name)).count()
-            if verify_user == 0:
+        try:
+            if verres == '0':
                 res = {
                     'status': 'no',
-                    'info': '无此用户。',
+                    'info': '信息验证失败。',
                 }
                 retdata.append(res)
                 jsondata = json.dumps(retdata)
                 return HttpResponse(content=jsondata)
-            else:
-                verify_user = User_local.objects.filter(
-                    Q(username=u_name) & Q(enter_name=data['entername'])).count()
+            elif verres == '1':
+                verify_user = User_local.objects.filter(Q(username=u_name)).count()
                 if verify_user == 0:
                     res = {
                         'status': 'no',
-                        'info': '此用户无法登录当前企业。',
+                        'info': '无此用户。',
                     }
                     retdata.append(res)
                     jsondata = json.dumps(retdata)
                     return HttpResponse(content=jsondata)
                 else:
-                    print(0000)
-                    verify_user = User_local.objects.filter(Q(username=u_name) & Q(
-                        password=u_pwd) & Q(enter_name=data['entername'])).count()
+                    verify_user = User_local.objects.filter(
+                        Q(username=u_name) & Q(enter_name=data['entername'])).count()
                     if verify_user == 0:
                         res = {
                             'status': 'no',
-                            'info': '密码错误。',
+                            'info': '此用户无法登录当前企业。',
                         }
                         retdata.append(res)
                         jsondata = json.dumps(retdata)
                         return HttpResponse(content=jsondata)
                     else:
+                        print(0000)
                         verify_user = User_local.objects.filter(Q(username=u_name) & Q(
-                            password=u_pwd) & Q(enter_name=data['entername']))
-                        for value in verify_user.values():
+                            password=u_pwd) & Q(enter_name=data['entername'])).count()
+                        if verify_user == 0:
                             res = {
-                                'status': 'OK',
-                                'info': '登录成功。',
-                                'name_cn': value.get('show_name'),
-                                'name_id': value.get('id'),
-                                'user_permiss': value.get('user_permissions')
+                                'status': 'no',
+                                'info': '密码错误。',
                             }
                             retdata.append(res)
-                        jsondata = json.dumps(retdata)
-                        return HttpResponse(content=jsondata)
+                            jsondata = json.dumps(retdata)
+                            return HttpResponse(content=jsondata)
+                        else:
+                            verify_user = User_local.objects.filter(Q(username=u_name) & Q(
+                                password=u_pwd) & Q(enter_name=data['entername']))
+                            for value in verify_user.values():
+                                res = {
+                                    'status': 'OK',
+                                    'info': '登录成功。',
+                                    'name_cn': value.get('show_name'),
+                                    'name_id': value.get('id'),
+                                    'user_permiss': value.get('user_permissions')
+                                }
+                                retdata.append(res)
+                            jsondata = json.dumps(retdata)
+                            return HttpResponse(content=jsondata)
+        except Exception as e:
+            res = {
+                 'status': 'OK',
+                 'info': '登录成功。',
+                 'name_cn': value.get('show_name'),
+                 'name_id': value.get('id'),
+                 'user_permiss': value.get('user_permissions')
+                }
+            retdata.append(res)
+            jsondata = json.dumps(retdata)
+            return HttpResponse(content=jsondata)
