@@ -1,10 +1,12 @@
 # -*- coding: utf-8 -*-
 
 import json
+import uuid
 from django.contrib.auth.hashers import make_password
 from django.http import HttpResponse
 from django.db.models import Q
-from .models import User_local, Enterprise
+from .create_uuid import Encrypt_code
+from .models import User_local, Enterprise,login_logs
 from .verify_terminal import VerifyTerminal
 
 
@@ -83,26 +85,37 @@ class VerifyUserInformation():
                             jsondata = json.dumps(retdata)
                             return HttpResponse(content=jsondata)
                         else:
-                            verify_user = User_local.objects.filter(Q(username=u_name) & Q(
-                                password=u_pwd) & Q(enter_name=data['entername']))
-                            for value in verify_user.values():
-                                res = {
-                                    'status': 'OK',
-                                    'info': '登录成功。',
-                                    'name_cn': value.get('show_name'),
-                                    'name_id': value.get('id'),
-                                    'user_permiss': value.get('user_permissions')
-                                }
-                                retdata.append(res)
-                            jsondata = json.dumps(retdata)
-                            return HttpResponse(content=jsondata)
+                            ls_uuid = uuid.uuid4()
+                            user_id=Encrypt_code(Encrypt_code(),ls_uuid)
+                            try:
+                                aa=login_logs.objects.filter(Q(login_uuid=data['uuid']) & Q(return_uuid=data['retuuid'])).update(login_user_id=user_id)
+                                print(aa.count())
+                                verify_user = User_local.objects.filter(Q(username=u_name) & Q(
+                                    password=u_pwd) & Q(enter_name=data['entername']))
+                                for value in verify_user.values():
+                                    res = {
+                                        'status': 'OK',
+                                        'info': '登录成功。',
+                                        'name_cn': value.get('show_name'),
+                                        'name_id': value.get('id'),
+                                        'user_permiss': value.get('user_permissions')
+                                    }
+                                    retdata.append(res)
+                                jsondata = json.dumps(retdata)
+                                return HttpResponse(content=jsondata)
+                            except Exception as e:
+                                            res = {
+                                                       'status': 'No',
+                                                                                         'info': '请联系系统管理员。',   
+                                                                                                                         }
+                                            retdata.append(res)
+                                            jsondata = json.dumps(retdata)
+            return HttpResponse(content=jsondata)
+        
         except Exception as e:
             res = {
-                 'status': 'OK',
-                 'info': '登录成功。',
-                 'name_cn': value.get('show_name'),
-                 'name_id': value.get('id'),
-                 'user_permiss': value.get('user_permissions')
+                 'status': 'No',
+                 'info': '请联系系统管理员。',   
                 }
             retdata.append(res)
             jsondata = json.dumps(retdata)
