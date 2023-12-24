@@ -16,14 +16,8 @@ Including another URLconf
 """
 from django.urls import path
 
-from .views import ResetDefault
-from .verify_user import VerifyUserInformation
+from .views import default_set
 
 urlpatterns = [
-    path(r'get_enterprise_information/',
-         ResetDefault.get_enterprise_information),  # 获取企业信息
-    path(r'set_user_information/',
-         VerifyUserInformation.set_user_information),  # 创建用户
-    path(r'verify_user_information/',
-         VerifyUserInformation.verify_user_information),  # 用户登录验证
+    path(r'set_default/', default_set),
 ]

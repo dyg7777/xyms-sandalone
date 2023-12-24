@@ -1,7 +1,7 @@
 from typing import dataclass_transform
 
 from django.http import HttpResponseRedirect
-from .models import OwnerForGoods, QualityInspectionDeductionStandardFile, QualityInspectionDeductionStandard, QualityInspectionDeductionStandardBack, MoisturePrice, LocationWarehouseNumber, UnloadingFee, GrainSellerInformations, CarDriverAndVehicleInformations, grain_in_main
+from ..grain_in.models import OwnerForGoods, QualityInspectionDeductionStandardFile, QualityInspectionDeductionStandard, QualityInspectionDeductionStandardBack, MoisturePrice, LocationWarehouseNumber, UnloadingFee, GrainSellerInformations, CarDriverAndVehicleInformations, grain_in_main
 from django.db import connection
 
 

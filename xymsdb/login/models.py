@@ -1,9 +1,7 @@
-import uuid
+# -*- coding: utf-8 -*-
+
 from django.db import models
-from django.conf import settings
 from django.contrib.auth.hashers import make_password
-from django.forms import UUIDField
-from django.utils import timezone
 
 # Create your models here.
 
@@ -66,9 +64,10 @@ class login_logs(models.Model):
     login_uuid = models.CharField(
         max_length=100, null=True, blank=True, default='', help_text='登录设备UUID每次更新')
     login_time = models.DateTimeField(auto_now_add=True, help_text='登录时间')
-    logout_time = models.DateTimeField(auto_now_add=True, help_text='登出时间')
+    logout_time = models.DateTimeField( null=True,blank=True,help_text='登出时间')
     return_uuid = models.CharField(
         max_length=60, null=True, blank=True, default='', help_text='返回前端登录识别码')
+    login_user_id =models.CharField(max_length=100,default='',null=True, blank=True,help_text='登录的用户ID')
 
 
 # 程序目录

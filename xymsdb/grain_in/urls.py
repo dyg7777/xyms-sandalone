@@ -16,8 +16,6 @@ Including another URLconf
 """
 from django.urls import path
 
-from .views import *
-
 urlpatterns = [
-    # path(r'set_default/', ''),
+    # path(r'set_default/', default_set),
 ]

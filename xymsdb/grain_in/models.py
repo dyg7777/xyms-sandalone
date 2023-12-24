@@ -124,6 +124,7 @@ class QualityInspectionDeductionStandard(models.Model):
     edit_datetime = models.DateTimeField(auto_now=True, help_text='最后修改时间')
     status = models.CharField(max_length=2, blank=True,
                               null=True, default='1', help_text='记录状态0失效')
+    
     # 质检标准操作备份
 
 

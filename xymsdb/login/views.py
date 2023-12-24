@@ -1,10 +1,10 @@
+# -*- coding: utf-8 -*-
 from django.db.models import Q
 from datetime import datetime
 import json
 from django.shortcuts import render
 from django.http import HttpResponse
 # Create your views here.
-from .set_default import *
 from .create_uuid import Encrypt_code
 from .models import Enterprise, login_logs
 
