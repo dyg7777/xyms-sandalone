@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+from xmlrpc.client import boolean
 from django.db import models
 from django.contrib.auth.hashers import make_password
 
@@ -64,12 +65,19 @@ class login_logs(models.Model):
     login_uuid = models.CharField(
         max_length=100, null=True, blank=True, default='', help_text='登录设备UUID每次更新')
     login_time = models.DateTimeField(auto_now_add=True, help_text='登录时间')
-    logout_time = models.DateTimeField(auto_now_add=True, help_text='登出时间')
+    logout_time = models.DateTimeField(auto_now=True, help_text='最后操作或者登出时间')
     return_uuid = models.CharField(
-        max_length=60, null=True, blank=True, default='', help_text='返回前端登录识别码')
-
+        max_length=100, null=True, blank=True, default='', help_text='返回前端登录识别码')
+    login_user_code = models.CharField(
+        max_length=100, null=True, blank=True, default="<empty>", help_text='登录的用户code')
+    login_enter_code = models.CharField(
+        max_length=100, null=True, blank=True, default='', help_text='登录的企业code')
+    login_dev_uuid = models.CharField(
+        max_length=100, null=True, blank=True, default='', help_text='登录设备ID,第一次登录创建后不换系统永久有效')
 
 # 程序目录
+
+
 class ProgectPath(models.Model):
     projectfile_path = models.CharField(
         max_length=255, null=True, blank=True, unique=True, default='', help_text='程序工作目录')
