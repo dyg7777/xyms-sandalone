@@ -19,8 +19,8 @@ class ResetDefault():
 
     def get_enterprise_information(request):
         data = json.loads(request.body)
-        localuuid = data['uuid']
-        dev_uuid = data['dev_uid']
+        localuuid = data['local_uuid']
+        dev_uuid = data['dev_uuid']
         retuuid = Encrypt_code.make_encrypt_code(Encrypt_code(), localuuid)
         retsql = Enterprise.objects.all()
         data = []

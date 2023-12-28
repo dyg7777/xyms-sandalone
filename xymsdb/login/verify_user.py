@@ -77,14 +77,21 @@ class VerifyUserInformation():
     # 用户登录验证
 
     def verify_user_information(request):
-        data = json.loads(request.body)
         retdata = []
+
+        data = json.loads(request.body)
+        local_uuid = data['local_uuid']
+        return_uuid = data['ret_uuid']
+        dev_uuid = data['dev_uuid']
+        lenter_code = data['enter_code']
+
         u_name = make_password(
-            data['username'], salt='980513', hasher='default')
-        u_pwd = make_password(data['passwd'], salt='1975217', hasher='default')
+            data['user_name'], salt='980513', hasher='default')
+        u_pwd = make_password(
+            data['pass_word'], salt='1975217', hasher='default')
+
         verres = VerifyTerminal.verify_terminal(
-            VerifyTerminal(), data['uuid'], data['retuuid'], data['entername'])
-<<<<<<< HEAD
+            VerifyTerminal(), local_uuid, return_uuid, lenter_code, dev_uuid)
 
         if verres == '0':
             res = {
@@ -98,19 +105,6 @@ class VerifyUserInformation():
             try:
                 verify_user = User_local.objects.filter(
                     Q(username=u_name)).count()
-=======
-        try:
-            if verres == '0':
-                res = {
-                    'status': 'no',
-                    'info': '信息验证失败。',
-                }
-                retdata.append(res)
-                jsondata = json.dumps(retdata)
-                return HttpResponse(content=jsondata)
-            elif verres == '1':
-                verify_user = User_local.objects.filter(Q(username=u_name)).count()
->>>>>>> 21fa9a47856e9b22a17ca0ee5cc9e8a05a4a877e
                 if verify_user == 0:
                     res = {
                         'status': 'no',
@@ -121,7 +115,7 @@ class VerifyUserInformation():
                     return HttpResponse(content=jsondata)
                 else:
                     verify_user = User_local.objects.filter(
-                        Q(username=u_name) & Q(enter_name=data['entername'])).count()
+                        Q(username=u_name) & Q(enter_code=lenter_code)).count()
                     if verify_user == 0:
                         res = {
                             'status': 'no',
@@ -133,7 +127,7 @@ class VerifyUserInformation():
                     else:
                         print(0000)
                         verify_user = User_local.objects.filter(Q(username=u_name) & Q(
-                            password=u_pwd) & Q(enter_name=data['entername'])).count()
+                            password=u_pwd) & Q(enter_code=lenter_code)).count()
                         if verify_user == 0:
                             res = {
                                 'status': 'no',
@@ -143,9 +137,8 @@ class VerifyUserInformation():
                             jsondata = json.dumps(retdata)
                             return HttpResponse(content=jsondata)
                         else:
-<<<<<<< HEAD
                             verify_user = User_local.objects.filter(Q(username=u_name) & Q(
-                                password=u_pwd) & Q(enter_name=data['entername']))
+                                password=u_pwd) & Q(enter_code=lenter_code))
                             for value in verify_user.values():
                                 res = {
                                     'status': 'OK',
@@ -165,40 +158,3 @@ class VerifyUserInformation():
                 retdata.append(res)
                 jsondata = json.dumps(retdata)
                 return HttpResponse(content=jsondata)
-=======
-                            ls_uuid = uuid.uuid4()
-                            user_id=Encrypt_code(Encrypt_code(),ls_uuid)
-                            try:
-                                aa=login_logs.objects.filter(Q(login_uuid=data['uuid']) & Q(return_uuid=data['retuuid'])).update(login_user_id=user_id)
-                                print(aa.count())
-                                verify_user = User_local.objects.filter(Q(username=u_name) & Q(
-                                    password=u_pwd) & Q(enter_name=data['entername']))
-                                for value in verify_user.values():
-                                    res = {
-                                        'status': 'OK',
-                                        'info': '登录成功。',
-                                        'name_cn': value.get('show_name'),
-                                        'name_id': value.get('id'),
-                                        'user_permiss': value.get('user_permissions')
-                                    }
-                                    retdata.append(res)
-                                jsondata = json.dumps(retdata)
-                                return HttpResponse(content=jsondata)
-                            except Exception as e:
-                                            res = {
-                                                       'status': 'No',
-                                                                                         'info': '请联系系统管理员。',   
-                                                                                                                         }
-                                            retdata.append(res)
-                                            jsondata = json.dumps(retdata)
-            return HttpResponse(content=jsondata)
-        
-        except Exception as e:
-            res = {
-                 'status': 'No',
-                 'info': '请联系系统管理员。',   
-                }
-            retdata.append(res)
-            jsondata = json.dumps(retdata)
-            return HttpResponse(content=jsondata)
->>>>>>> 21fa9a47856e9b22a17ca0ee5cc9e8a05a4a877e

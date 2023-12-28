@@ -1,9 +1,10 @@
 # -*- coding: utf-8 -*-
 
+from email.policy import default
 from xmlrpc.client import boolean
 from django.db import models
 from django.contrib.auth.hashers import make_password
-
+from django.utils import timezone
 # Create your models here.
 
 # 企业信息和授权信息
@@ -54,8 +55,8 @@ class User_local(models.Model):
         max_length=100, null=True, blank=True, default='鑫奕科创', help_text='用来显示用户名信息')
     user_permissions = models.CharField(
         max_length=50, null=True, blank=True, default='0000', help_text='用户权限')
-    enter_name = models.CharField(
-        max_length=255, null=True, blank=True, default='', help_text='账户所属企业名称')
+    enter_code = models.CharField(
+        max_length=255, null=True, blank=True, default='', help_text='账户所属企业code')
     create_datetime = models.DateTimeField(auto_now_add=True, help_text='创建时间')
 
 # 设备登录日志
@@ -65,7 +66,8 @@ class login_logs(models.Model):
     login_uuid = models.CharField(
         max_length=100, null=True, blank=True, default='', help_text='登录设备UUID每次更新')
     login_time = models.DateTimeField(auto_now_add=True, help_text='登录时间')
-    logout_time = models.DateTimeField(auto_now=True, help_text='最后操作或者登出时间')
+    logout_time = models.DateTimeField(
+        default=timezone.now, help_text='最后操作或者登出时间')
     return_uuid = models.CharField(
         max_length=100, null=True, blank=True, default='', help_text='返回前端登录识别码')
     login_user_code = models.CharField(
