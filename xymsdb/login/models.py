@@ -65,7 +65,6 @@ class login_logs(models.Model):
     login_uuid = models.CharField(
         max_length=100, null=True, blank=True, default='', help_text='登录设备UUID每次更新')
     login_time = models.DateTimeField(auto_now_add=True, help_text='登录时间')
-<<<<<<< HEAD
     logout_time = models.DateTimeField(auto_now=True, help_text='最后操作或者登出时间')
     return_uuid = models.CharField(
         max_length=100, null=True, blank=True, default='', help_text='返回前端登录识别码')
@@ -75,13 +74,6 @@ class login_logs(models.Model):
         max_length=100, null=True, blank=True, default='', help_text='登录的企业code')
     login_dev_uuid = models.CharField(
         max_length=100, null=True, blank=True, default='', help_text='登录设备ID,第一次登录创建后不换系统永久有效')
-=======
-    logout_time = models.DateTimeField( null=True,blank=True,help_text='登出时间')
-    return_uuid = models.CharField(
-        max_length=60, null=True, blank=True, default='', help_text='返回前端登录识别码')
-    login_user_id =models.CharField(max_length=100,default='',null=True, blank=True,help_text='登录的用户ID')
-
->>>>>>> 21fa9a47856e9b22a17ca0ee5cc9e8a05a4a877e
 
 # 程序目录
 

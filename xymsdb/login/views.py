@@ -29,6 +29,7 @@ class ResetDefault():
                 ll.get('enter_author_start_date'), "%Y-%m-%d,%H:%M:%S")
             end_t = datetime.strftime(
                 ll.get('enter_author_end_date'), "%Y-%m-%d,%H:%M:%S")
+            enter_code = ll.get('enter_code')
 
             res = {
                 'status': 'ok',
@@ -43,7 +44,7 @@ class ResetDefault():
                 'app_name': ll.get('app_name'),
             }
             retsql = login_logs.objects.create(
-                login_uuid=localuuid, return_uuid=retuuid, login_enter_code=ll.get('enter_code'), login_dev_uuid=dev_uuid)
+                login_uuid=localuuid, return_uuid=retuuid, login_enter_code=enter_code, login_dev_uuid=dev_uuid)
             retsql.save()
             data.append(res)
         ret_data = json.dumps(data)
