@@ -1,12 +1,10 @@
 # -*- coding: utf-8 -*-
 
 import json
-import uuid
 from django.contrib.auth.hashers import make_password
 from django.http import HttpResponse
 from django.db.models import Q
-from .create_uuid import Encrypt_code
-from .models import User_local, Enterprise,login_logs
+from .models import User_local, UserPermissions
 from .verify_terminal import VerifyTerminal
 
 # 本企业用户验证信息
@@ -17,19 +15,26 @@ class VerifyUserInformation():
     # 添加新用户
     def set_user_information(request):
         data = json.loads(request.body)
-        local_uuid = data['uuid']
-        return_uuid = data['retuuid']
-        enter_name = data['entername']
-        u_name = data['user_name']
-        u_password = data['password']
-        u_permissions_name = data['user_permissions']
         retdata = []
+        local_uuid = data['local_uuid']
+        return_uuid = data['ret_uuid']
+        dev_uuid = data['dev_uuid']
+        lenter_code = data['enter_code']
+        u_name = make_password(
+            data['user_name'], salt='980513', hasher='default')
+        u_pwd = make_password(
+            data['pass_word'], salt='1975217', hasher='default')
+        show_name = data['show_name']
+        user_permissions_code = UserPermissions.objects.filter(
+            Q(permissions_name=data['user_permiss'])).values('permissions_code')
+
         verres = VerifyTerminal.verify_terminal(
-            VerifyTerminal(), local_uuid, return_uuid, enter_name)
+            VerifyTerminal(), local_uuid, return_uuid, lenter_code, dev_uuid)
+
         if verres == '0':
             res = {
                 'status': 'no',
-                'info': '信息验证失败,本次登录为非法尝试。',
+                'info': '信息验证失败，本次登录为非法尝试。',
             }
             retdata.append(res)
             jsondata = json.dumps(retdata)
@@ -37,11 +42,11 @@ class VerifyUserInformation():
         elif verres == '1':
             try:
                 res = User_local.objects.filter(
-                    Q(username=u_name) & Q(enter_name=data['entername'])).count()
+                    Q(username=u_name) & Q(enter_code=lenter_code)).count()
                 if res == 0:
                     res = User_local.objects.create(username=make_password(
-                        data['username'], salt='980513', hasher='default'), password=make_password(
-                        data['passwd'], salt='1975217', hasher='default'), show_name=data['showname'], user_permissions='2006', enter_name='鑫奕科创')
+                        u_name, salt='980513', hasher='default'), password=make_password(
+                        u_pwd, salt='1975217', hasher='default'), show_name=show_name, user_permissions=user_permissions_code, enter_code=lenter_code)
                     retdata.append({
                         'status': 'ok',
                         'info': '用户添加成功。'
@@ -84,7 +89,6 @@ class VerifyUserInformation():
         return_uuid = data['ret_uuid']
         dev_uuid = data['dev_uuid']
         lenter_code = data['enter_code']
-
         u_name = make_password(
             data['user_name'], salt='980513', hasher='default')
         u_pwd = make_password(
@@ -125,7 +129,6 @@ class VerifyUserInformation():
                         jsondata = json.dumps(retdata)
                         return HttpResponse(content=jsondata)
                     else:
-                        print(0000)
                         verify_user = User_local.objects.filter(Q(username=u_name) & Q(
                             password=u_pwd) & Q(enter_code=lenter_code)).count()
                         if verify_user == 0:

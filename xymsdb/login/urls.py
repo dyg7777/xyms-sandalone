@@ -16,12 +16,14 @@ Including another URLconf
 """
 from django.urls import path
 
-from .views import ResetDefault
+from .views import InitialValidation
 from .verify_user import VerifyUserInformation
 
 urlpatterns = [
     path(r'get_enterprise_information/',
-         ResetDefault.get_enterprise_information),  # 获取企业信息
+         InitialValidation.get_enterprise_information),  # 获取企业信息
+    path(r'get_user_informations/',
+         InitialValidation.get_user_information),  # 获取用户库是否为空
     path(r'set_user_information/',
          VerifyUserInformation.set_user_information),  # 创建用户
     path(r'verify_user_information/',
