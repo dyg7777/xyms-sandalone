@@ -1,12 +1,12 @@
 *       *********************************************************
 *       *                                                         
-*       * 12/28/23             REGMENU.MPR              21:51:11  
+*       * 01/08/24             REGMENU.MPR              10:16:16  
 *       *                                                         
 *       *********************************************************
 *       *                                                         
 *       * 耿春雨                                                  
 *       *                                                         
-*       * Copyright (C) 2023 双城市鑫奕科技电脑网络有限公司       
+*       * Copyright (C) 2024 双城市鑫奕科技电脑网络有限公司       
 *       * 黑龙江省双城市星城名苑34202室                           
 *       * 双城市, 龙江  150100                                      
 *       * 中国                                              
@@ -27,15 +27,15 @@
 SET SYSMENU TO
 SET SYSMENU AUTOMATIC
 
-DEFINE PAD _6sj1au7nj OF _MSYSMENU PROMPT "帮助(\<H)" COLOR SCHEME 3 ;
+DEFINE PAD _6sw0m0j97 OF _MSYSMENU PROMPT "帮助(\<H)" COLOR SCHEME 3 ;
 	KEY ALT+H, ""
-DEFINE PAD _6sj1au7nk OF _MSYSMENU PROMPT "软件授权(\<I)" COLOR SCHEME 3 ;
+DEFINE PAD _6sw0m0j98 OF _MSYSMENU PROMPT "软件授权(\<I)" COLOR SCHEME 3 ;
 	KEY ALT+I, ""
-DEFINE PAD _6sj1au7nl OF _MSYSMENU PROMPT "退出(\<Q)" COLOR SCHEME 3 ;
+DEFINE PAD _6sw0m0j99 OF _MSYSMENU PROMPT "退出(\<Q)" COLOR SCHEME 3 ;
 	KEY ALT+Q, ""
-ON PAD _6sj1au7nj OF _MSYSMENU ACTIVATE POPUP 帮助h
-ON SELECTION PAD _6sj1au7nk OF _MSYSMENU do form pathh+"\scx\gzdw"
-ON SELECTION PAD _6sj1au7nl OF _MSYSMENU quit
+ON PAD _6sw0m0j97 OF _MSYSMENU ACTIVATE POPUP 帮助h
+ON SELECTION PAD _6sw0m0j98 OF _MSYSMENU do form pathh+"\scx\gzdw"
+ON SELECTION PAD _6sw0m0j99 OF _MSYSMENU quit
 
 DEFINE POPUP 帮助h MARGIN RELATIVE SHADOW COLOR SCHEME 4
 DEFINE BAR 1 OF 帮助h PROMPT "官方网站(\<W)"
@@ -45,15 +45,15 @@ DEFINE BAR 4 OF 帮助h PROMPT "\-"
 DEFINE BAR 5 OF 帮助h PROMPT "软件授权(\<A)"
 DEFINE BAR 6 OF 帮助h PROMPT "\-"
 ON SELECTION BAR 1 OF 帮助h ;
-	DO _6sj1au7nm ;
-	IN LOCFILE("\XYMS_STANDALONE\MENU\REGMENU" ,"MPX;MPR|FXP;PRG" ,"WHERE is REGMENU?")
+	DO _6sw0m0j9a ;
+	IN LOCFILE("\XYMS-SANDALONE\MENU\REGMENU" ,"MPX;MPR|FXP;PRG" ,"WHERE is REGMENU?")
 ON SELECTION BAR 3 OF 帮助h do form pathh+"\scx\sqxk"
 ON SELECTION BAR 5 OF 帮助h do form pathh+"\scx\gzdw"
 
 
 *       *********************************************************
 *       *                                                         
-*       * _6SJ1AU7NM  ON SELECTION BAR 1 OF POPUP 帮助h           
+*       * _6SW0M0J9A  ON SELECTION BAR 1 OF POPUP 帮助h           
 *       *                                                         
 *       * Procedure Origin:                                       
 *       *                                                         
@@ -64,7 +64,7 @@ ON SELECTION BAR 5 OF 帮助h do form pathh+"\scx\gzdw"
 *       *                                                         
 *       *********************************************************
 *
-PROCEDURE _6sj1au7nm
+PROCEDURE _6sw0m0j9a
 LOCAL loWebBrowser
 loWebBrowser = CREATEOBJECT("InternetExplorer.Application")
 loWebBrowser.Navigate("http://www.xy2cn.com")

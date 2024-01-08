@@ -4,7 +4,7 @@ import json
 from django.contrib.auth.hashers import make_password
 from django.http import HttpResponse
 from django.db.models import Q
-from .models import User_local, UserPermissions
+from .models import User_local, UserPermissions, login_logs
 from .verify_terminal import VerifyTerminal
 
 # 本企业用户验证信息
@@ -85,6 +85,7 @@ class VerifyUserInformation():
         retdata = []
 
         data = json.loads(request.body)
+        print(data)
         local_uuid = data['local_uuid']
         return_uuid = data['ret_uuid']
         dev_uuid = data['dev_uuid']
@@ -92,7 +93,7 @@ class VerifyUserInformation():
         u_name = make_password(
             data['user_name'], salt='980513', hasher='default')
         u_pwd = make_password(
-            data['pass_word'], salt='1975217', hasher='default')
+            data['pass_wd'], salt='1975217', hasher='default')
 
         verres = VerifyTerminal.verify_terminal(
             VerifyTerminal(), local_uuid, return_uuid, lenter_code, dev_uuid)
@@ -152,7 +153,18 @@ class VerifyUserInformation():
                                 }
                                 retdata.append(res)
                             jsondata = json.dumps(retdata)
-                            return HttpResponse(content=jsondata)
+                            try:
+                                login_logs.objects.filter(Q(login_uuid=local_uuid) & Q(return_uuid=return_uuid) & Q(
+                                    login_enter_code=lenter_code) & Q(login_dev_uuid=dev_uuid)).update(login_user_code=u_name)
+                                return HttpResponse(content=jsondata)
+                            except Exception as e:
+                                res = {
+                                    'status': 'no',
+                                    'info': '更新验证数据失败！',
+                                }
+                                retdata.append(res)
+                                jsondata = json.dumps(retdata)
+                                return HttpResponse(content=jsondata)
             except Exception as e:
                 res = {
                     'status': 'no',
