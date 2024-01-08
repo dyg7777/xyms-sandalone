@@ -74,7 +74,38 @@ class VerifyUserInformation():
     # 设置用户时获取用户列表
 
     def get_user_list(request):
-        pass
+        retdata = []
+        # data = json.loads(request.body)
+        # local_uuid = data['local_uuid']
+        # return_uuid = data['ret_uuid']
+        # dev_uuid = data['dev_uuid']
+        # lenter_code = data['enter_code']
+        # verres = VerifyTerminal.verify_terminal(
+        #     VerifyTerminal(), local_uuid, return_uuid, lenter_code, dev_uuid)
+        # if verres == '0':
+        #     res = {
+        #         'status': 'no',
+        #         'info': '信息验证失败，本次登录为非法尝试。',
+        #     }
+        #     retdata.append(res)
+        #     jsondata = json.dumps(retdata)
+        #     return HttpResponse(content=jsondata)
+        # elif verres == '1':
+        retsql = UserPermissions.objects.all()
+        print(list(retsql.values()))
+
+        retdata_json = json.dumps(list(retsql.values()))
+        return HttpResponse(retdata_json)
+
+        # res = {
+        #     'status': 'no',
+        #     'info': '信息验证失败，本次登录为非法尝试。',
+        # }
+        # retdata.append(res)
+        # jsondata = json.dumps(retdata)
+        # return HttpResponse(content=jsondata)
+
+    # 获取用户权限列表
 
     def get_user_permissions(request):
         pass
@@ -83,9 +114,7 @@ class VerifyUserInformation():
 
     def verify_user_information(request):
         retdata = []
-
         data = json.loads(request.body)
-        print(data)
         local_uuid = data['local_uuid']
         return_uuid = data['ret_uuid']
         dev_uuid = data['dev_uuid']

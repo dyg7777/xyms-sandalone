@@ -28,4 +28,5 @@ urlpatterns = [
          VerifyUserInformation.set_user_information),  # 创建用户
     path(r'verify_user_information/',
          VerifyUserInformation.verify_user_information),  # 用户登录验证
+    path('list/', VerifyUserInformation.get_user_list),
 ]
