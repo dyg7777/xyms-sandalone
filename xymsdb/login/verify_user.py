@@ -75,40 +75,63 @@ class VerifyUserInformation():
 
     def get_user_list(request):
         retdata = []
-        # data = json.loads(request.body)
-        # local_uuid = data['local_uuid']
-        # return_uuid = data['ret_uuid']
-        # dev_uuid = data['dev_uuid']
-        # lenter_code = data['enter_code']
-        # verres = VerifyTerminal.verify_terminal(
-        #     VerifyTerminal(), local_uuid, return_uuid, lenter_code, dev_uuid)
-        # if verres == '0':
-        #     res = {
-        #         'status': 'no',
-        #         'info': '信息验证失败，本次登录为非法尝试。',
-        #     }
-        #     retdata.append(res)
-        #     jsondata = json.dumps(retdata)
-        #     return HttpResponse(content=jsondata)
-        # elif verres == '1':
-        retsql = UserPermissions.objects.all()
-        print(list(retsql.values()))
-
-        retdata_json = json.dumps(list(retsql.values()))
-        return HttpResponse(retdata_json)
-
-        # res = {
-        #     'status': 'no',
-        #     'info': '信息验证失败，本次登录为非法尝试。',
-        # }
-        # retdata.append(res)
-        # jsondata = json.dumps(retdata)
-        # return HttpResponse(content=jsondata)
+        data = json.loads(request.body)
+        local_uuid = data['local_uuid']
+        return_uuid = data['ret_uuid']
+        dev_uuid = data['dev_uuid']
+        lenter_code = data['enter_code']
+        verres = VerifyTerminal.verify_terminal(
+            VerifyTerminal(), local_uuid, return_uuid, lenter_code, dev_uuid)
+        if verres == '0':
+            res = {
+                'status': 'no',
+                'info': '信息验证失败，本次登录为非法尝试。',
+            }
+            retdata.append(res)
+            jsondata = json.dumps(retdata)
+            return HttpResponse(content=jsondata)
+        elif verres == '1':
+            retsql = User_local.objects.values(
+                'id', 'user_phone', 'user_email', 'show_name', 'user_permissions').filter(Q(enter_code=lenter_code))
+            res = {
+                'status': 'OK',
+                'info': '信息获取成功',
+            }
+            retdata = list(retsql.values())
+            print(retdata)
+            # retdata.insert(0, res)
+            retdata_json = json.dumps(retdata)
+            return HttpResponse(retdata_json)
 
     # 获取用户权限列表
 
     def get_user_permissions(request):
-        pass
+        retdata = []
+        data = json.loads(request.body)
+        local_uuid = data['local_uuid']
+        return_uuid = data['ret_uuid']
+        dev_uuid = data['dev_uuid']
+        lenter_code = data['enter_code']
+        verres = VerifyTerminal.verify_terminal(
+            VerifyTerminal(), local_uuid, return_uuid, lenter_code, dev_uuid)
+        if verres == '0':
+            res = {
+                'status': 'no',
+                'info': '信息验证失败，本次登录为非法尝试。',
+            }
+            retdata.append(res)
+            jsondata = json.dumps(retdata)
+            return HttpResponse(content=jsondata)
+        elif verres == '1':
+            retsql = UserPermissions.objects.all()
+            res = {
+                'status': 'OK',
+                'info': '信息获取成功',
+            }
+            retdata = list(retsql.values())
+            retdata.insert(0, res)
+            retdata_json = json.dumps(retdata)
+            return HttpResponse(retdata_json)
 
     # 用户登录验证
 

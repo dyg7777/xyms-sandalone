@@ -51,6 +51,10 @@ class User_local(models.Model):
         '鑫奕科创', salt='980513', hasher='default'), help_text='用户名')
     password = models.CharField(max_length=255, null=True, blank=True, default=make_password(
         '15145181511', salt='1975217', hasher="default"), help_text='登录密码')
+    user_phone = models.CharField(
+        max_length=30, null=True, blank=True, default='15145181511', help_text="用户电话")
+    user_email = models.CharField(
+        max_length=30, null=True, blank=True, default='xykc@xy2cn.cn', help_text="用户电子信箱")
     show_name = models.CharField(
         max_length=100, null=True, blank=True, default='鑫奕科创', help_text='用来显示用户名信息')
     user_permissions = models.CharField(

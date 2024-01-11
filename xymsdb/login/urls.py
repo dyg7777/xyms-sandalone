@@ -20,13 +20,22 @@ from .views import InitialValidation
 from .verify_user import VerifyUserInformation
 
 urlpatterns = [
+    # 获取企业信息
     path(r'get_enterprise_information/',
-         InitialValidation.get_enterprise_information),  # 获取企业信息
+         InitialValidation.get_enterprise_information),  # type: ignore
+    # 获取用户库是否为空
     path(r'get_user_informations/',
-         InitialValidation.get_user_information),  # 获取用户库是否为空
+         InitialValidation.get_user_information),  # type: ignore
+    # 创建用户
     path(r'set_user_information/',
-         VerifyUserInformation.set_user_information),  # 创建用户
+         VerifyUserInformation.set_user_information),  # type: ignore
+    # 用户登录验证
     path(r'verify_user_information/',
-         VerifyUserInformation.verify_user_information),  # 用户登录验证
-    path('list/', VerifyUserInformation.get_user_list),
+         VerifyUserInformation.verify_user_information),  # type: ignore
+    # 设置用户名获取用户权限
+    path(r'get_user_permissions/',
+         VerifyUserInformation.get_user_permissions),  # type: ignore
+    # 设置用户名获取用户列表
+    path(r'get_user_list/',
+         VerifyUserInformation.get_user_list),  # type: ignore
 ]
