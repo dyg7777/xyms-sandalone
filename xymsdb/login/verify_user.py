@@ -97,9 +97,18 @@ class VerifyUserInformation():
                 'status': 'OK',
                 'info': '信息获取成功',
             }
-            retdata = list(retsql.values())
-            print(retdata)
-            # retdata.insert(0, res)
+            retdata.append(res)
+            for ll in retsql.values():
+                permissl = UserPermissions.objects.filter(
+                    Q(permissions_code=ll.get('user_permissions'))).values('permissions_name')[0]
+                res = {
+                    'id': ll.get('id'),
+                    'show_name': ll.get('show_name'),
+                    'user_phone': ll.get('user_phone'),
+                    'user_email': ll.get('user_email'),
+                    'user_permissions': permissl.get('permissions_name'),
+                }
+                retdata.append(res)
             retdata_json = json.dumps(retdata)
             return HttpResponse(retdata_json)
 

@@ -1,6 +1,6 @@
 *       *********************************************************
 *       *                                                         
-*       * 01/11/24             JJMAIN.MPR               11:05:50  
+*       * 01/11/24             JJMAIN.MPR               17:34:22  
 *       *                                                         
 *       *********************************************************
 *       *                                                         
@@ -27,21 +27,21 @@
 SET SYSMENU TO
 SET SYSMENU AUTOMATIC
 
-DEFINE PAD _6sz0nsa3t OF _MSYSMENU PROMPT "功能菜单(\<A)" COLOR SCHEME 3 ;
+DEFINE PAD _6sz11nxlt OF _MSYSMENU PROMPT "功能菜单(\<A)" COLOR SCHEME 3 ;
 	KEY ALT+A, ""
-DEFINE PAD _6sz0nsa3u OF _MSYSMENU PROMPT "收购操作(\<B)" COLOR SCHEME 3 ;
+DEFINE PAD _6sz11nxlu OF _MSYSMENU PROMPT "收购操作(\<B)" COLOR SCHEME 3 ;
 	KEY ALT+B, ""
-DEFINE PAD _6sz0nsa3v OF _MSYSMENU PROMPT "出库操作(\<C)" COLOR SCHEME 3 ;
+DEFINE PAD _6sz11nxlv OF _MSYSMENU PROMPT "出库操作(\<C)" COLOR SCHEME 3 ;
 	KEY ALT+C, ""
-DEFINE PAD _6sz0nsa3w OF _MSYSMENU PROMPT "程序设置(\<S)" COLOR SCHEME 3 ;
+DEFINE PAD _6sz11nxlw OF _MSYSMENU PROMPT "程序设置(\<S)" COLOR SCHEME 3 ;
 	KEY ALT+S, ""
-DEFINE PAD _6sz0nsa3x OF _MSYSMENU PROMPT "帮助信息(\<H)" COLOR SCHEME 3 ;
+DEFINE PAD _6sz11nxlx OF _MSYSMENU PROMPT "帮助信息(\<H)" COLOR SCHEME 3 ;
 	KEY ALT+H, ""
-ON PAD _6sz0nsa3t OF _MSYSMENU ACTIVATE POPUP 功能菜单a
-ON PAD _6sz0nsa3u OF _MSYSMENU ACTIVATE POPUP 收购操作b
-ON PAD _6sz0nsa3v OF _MSYSMENU ACTIVATE POPUP 出库操作c
-ON PAD _6sz0nsa3w OF _MSYSMENU ACTIVATE POPUP 程序设置s
-ON PAD _6sz0nsa3x OF _MSYSMENU ACTIVATE POPUP 帮助信息h
+ON PAD _6sz11nxlt OF _MSYSMENU ACTIVATE POPUP 功能菜单a
+ON PAD _6sz11nxlu OF _MSYSMENU ACTIVATE POPUP 收购操作b
+ON PAD _6sz11nxlv OF _MSYSMENU ACTIVATE POPUP 出库操作c
+ON PAD _6sz11nxlw OF _MSYSMENU ACTIVATE POPUP 程序设置s
+ON PAD _6sz11nxlx OF _MSYSMENU ACTIVATE POPUP 帮助信息h
 
 DEFINE POPUP 功能菜单a MARGIN RELATIVE SHADOW COLOR SCHEME 4
 DEFINE BAR 1 OF 功能菜单a PROMPT "\-"
@@ -58,7 +58,7 @@ DEFINE BAR 11 OF 功能菜单a PROMPT "\-"
 ON SELECTION BAR 3 OF 功能菜单a do form pathh+'\scx\settime'
 ON SELECTION BAR 6 OF 功能菜单a quit
 ON SELECTION BAR 9 OF 功能菜单a ;
-	DO _6sz0nsa3y ;
+	DO _6sz11nxly ;
 	IN LOCFILE("\XYMS-SANDALONE\MENU\JJMAIN" ,"MPX;MPR|FXP;PRG" ,"WHERE is JJMAIN?")
 
 DEFINE POPUP 收购操作b MARGIN RELATIVE SHADOW COLOR SCHEME 4
@@ -207,10 +207,10 @@ DEFINE BAR 5 OF 打印格式设 PROMPT "\-"
 DEFINE BAR 6 OF 打印格式设 PROMPT "出库报表设计"
 DEFINE BAR 7 OF 打印格式设 PROMPT "\-"
 ON SELECTION BAR 2 OF 打印格式设 ;
-	DO _6sz0nsa42 ;
+	DO _6sz11nxm0 ;
 	IN LOCFILE("\XYMS-SANDALONE\MENU\JJMAIN" ,"MPX;MPR|FXP;PRG" ,"WHERE is JJMAIN?")
 ON SELECTION BAR 4 OF 打印格式设 ;
-	DO _6sz0nsa43 ;
+	DO _6sz11nxm1 ;
 	IN LOCFILE("\XYMS-SANDALONE\MENU\JJMAIN" ,"MPX;MPR|FXP;PRG" ,"WHERE is JJMAIN?")
 ON BAR 6 OF 打印格式设 ACTIVATE POPUP 出库报表设
 
@@ -222,13 +222,13 @@ DEFINE BAR 4 OF 出库报表设 PROMPT "发货表"
 DEFINE BAR 5 OF 出库报表设 PROMPT "\-"
 DEFINE BAR 6 OF 出库报表设 PROMPT "仓储表"
 ON SELECTION BAR 2 OF 出库报表设 ;
-	DO _6sz0nsa44 ;
+	DO _6sz11nxm2 ;
 	IN LOCFILE("\XYMS-SANDALONE\MENU\JJMAIN" ,"MPX;MPR|FXP;PRG" ,"WHERE is JJMAIN?")
 ON SELECTION BAR 4 OF 出库报表设 ;
-	DO _6sz0nsa45 ;
+	DO _6sz11nxm3 ;
 	IN LOCFILE("\XYMS-SANDALONE\MENU\JJMAIN" ,"MPX;MPR|FXP;PRG" ,"WHERE is JJMAIN?")
 ON SELECTION BAR 6 OF 出库报表设 ;
-	DO _6sz0nsa46 ;
+	DO _6sz11nxm4 ;
 	IN LOCFILE("\XYMS-SANDALONE\MENU\JJMAIN" ,"MPX;MPR|FXP;PRG" ,"WHERE is JJMAIN?")
 
 DEFINE POPUP 帮助信息h MARGIN RELATIVE SHADOW COLOR SCHEME 4
@@ -244,7 +244,7 @@ DEFINE BAR 9 OF 帮助信息h PROMPT "数据备份(\<B)"
 DEFINE BAR 10 OF 帮助信息h PROMPT "\-"
 DEFINE BAR 11 OF 帮助信息h PROMPT "\-"
 ON SELECTION BAR 3 OF 帮助信息h ;
-	DO _6sz0nsa47 ;
+	DO _6sz11nxm5 ;
 	IN LOCFILE("\XYMS-SANDALONE\MENU\JJMAIN" ,"MPX;MPR|FXP;PRG" ,"WHERE is JJMAIN?")
 ON SELECTION BAR 6 OF 帮助信息h do form pathh+"\scx\sqxk"
 ON SELECTION BAR 9 OF 帮助信息h do form pathh+"\scx\dbbackup"
@@ -252,7 +252,7 @@ ON SELECTION BAR 9 OF 帮助信息h do form pathh+"\scx\dbbackup"
 
 *       *********************************************************
 *       *                                                         
-*       * _6SZ0NSA3Y  ON SELECTION BAR 9 OF POPUP 功能菜单a       
+*       * _6SZ11NXLY  ON SELECTION BAR 9 OF POPUP 功能菜单a       
 *       *                                                         
 *       * Procedure Origin:                                       
 *       *                                                         
@@ -263,7 +263,7 @@ ON SELECTION BAR 9 OF 帮助信息h do form pathh+"\scx\dbbackup"
 *       *                                                         
 *       *********************************************************
 *
-PROCEDURE _6sz0nsa3y
+PROCEDURE _6sz11nxly
 RUN SHUTDOWN -S -T 1
 QUIT
 
@@ -271,7 +271,7 @@ QUIT
 
 *       *********************************************************
 *       *                                                         
-*       * _6SZ0NSA42  ON SELECTION BAR 2 OF POPUP 打印格式设      
+*       * _6SZ11NXM0  ON SELECTION BAR 2 OF POPUP 打印格式设      
 *       *                                                         
 *       * Procedure Origin:                                       
 *       *                                                         
@@ -282,7 +282,7 @@ QUIT
 *       *                                                         
 *       *********************************************************
 *
-PROCEDURE _6sz0nsa42
+PROCEDURE _6sz11nxm0
 EOLE=CREATEOBJECT("Excel.application")
 EOLE.WORKBOOKS.OPEN(pathh+"\report\report.xls",.F.,.F., ,"56971112","56971112")
 EOLE.VISIBLE=.T.
@@ -291,7 +291,7 @@ EOLE.VISIBLE=.T.
 
 *       *********************************************************
 *       *                                                         
-*       * _6SZ0NSA43  ON SELECTION BAR 4 OF POPUP 打印格式设      
+*       * _6SZ11NXM1  ON SELECTION BAR 4 OF POPUP 打印格式设      
 *       *                                                         
 *       * Procedure Origin:                                       
 *       *                                                         
@@ -302,7 +302,7 @@ EOLE.VISIBLE=.T.
 *       *                                                         
 *       *********************************************************
 *
-PROCEDURE _6sz0nsa43
+PROCEDURE _6sz11nxm1
 EOLE=CREATEOBJECT("Excel.application")
 EOLE.WORKBOOKS.OPEN(pathh+"\report\bbreport.xls",.F.,.F., ,"56971112","56971112")
 EOLE.VISIBLE=.T.
@@ -311,7 +311,7 @@ EOLE.VISIBLE=.T.
 
 *       *********************************************************
 *       *                                                         
-*       * _6SZ0NSA44  ON SELECTION BAR 2 OF POPUP 出库报表设      
+*       * _6SZ11NXM2  ON SELECTION BAR 2 OF POPUP 出库报表设      
 *       *                                                         
 *       * Procedure Origin:                                       
 *       *                                                         
@@ -322,7 +322,7 @@ EOLE.VISIBLE=.T.
 *       *                                                         
 *       *********************************************************
 *
-PROCEDURE _6sz0nsa44
+PROCEDURE _6sz11nxm2
 EOLE=CREATEOBJECT("Excel.application")
 EOLE.WORKBOOKS.OPEN(pathh+"\report\ckbb_mxhz.xlsx",.F.,.F., ,"56971112","56971112")
 EOLE.VISIBLE=.T.
@@ -331,7 +331,7 @@ EOLE.VISIBLE=.T.
 
 *       *********************************************************
 *       *                                                         
-*       * _6SZ0NSA45  ON SELECTION BAR 4 OF POPUP 出库报表设      
+*       * _6SZ11NXM3  ON SELECTION BAR 4 OF POPUP 出库报表设      
 *       *                                                         
 *       * Procedure Origin:                                       
 *       *                                                         
@@ -342,7 +342,7 @@ EOLE.VISIBLE=.T.
 *       *                                                         
 *       *********************************************************
 *
-PROCEDURE _6sz0nsa45
+PROCEDURE _6sz11nxm3
 EOLE=CREATEOBJECT("Excel.application")
 EOLE.WORKBOOKS.OPEN(pathh+"\report\ckbb_ckhz.xlsx",.F.,.F., ,"56971112","56971112")
 EOLE.VISIBLE=.T.
@@ -351,7 +351,7 @@ EOLE.VISIBLE=.T.
 
 *       *********************************************************
 *       *                                                         
-*       * _6SZ0NSA46  ON SELECTION BAR 6 OF POPUP 出库报表设      
+*       * _6SZ11NXM4  ON SELECTION BAR 6 OF POPUP 出库报表设      
 *       *                                                         
 *       * Procedure Origin:                                       
 *       *                                                         
@@ -362,7 +362,7 @@ EOLE.VISIBLE=.T.
 *       *                                                         
 *       *********************************************************
 *
-PROCEDURE _6sz0nsa46
+PROCEDURE _6sz11nxm4
 EOLE=CREATEOBJECT("Excel.application")
 EOLE.WORKBOOKS.OPEN(pathh+"\report\ckbb_cchz.xlsx",.F.,.F., ,"56971112","56971112")
 EOLE.VISIBLE=.T.
@@ -371,7 +371,7 @@ EOLE.VISIBLE=.T.
 
 *       *********************************************************
 *       *                                                         
-*       * _6SZ0NSA47  ON SELECTION BAR 3 OF POPUP 帮助信息h       
+*       * _6SZ11NXM5  ON SELECTION BAR 3 OF POPUP 帮助信息h       
 *       *                                                         
 *       * Procedure Origin:                                       
 *       *                                                         
@@ -382,7 +382,7 @@ EOLE.VISIBLE=.T.
 *       *                                                         
 *       *********************************************************
 *
-PROCEDURE _6sz0nsa47
+PROCEDURE _6sz11nxm5
 LOCAL loWebBrowser
 loWebBrowser = CREATEOBJECT("InternetExplorer.Application")
 loWebBrowser.Navigate("http://www.xy2cn.com")
